@@ -1,6 +1,6 @@
 <?php
-
-$url = "http://".$_SERVER['SERVER_NAME']."//penilaian-moving-average";
+$defaul_uri = "/penilaian-moving-average";
+$url = "http://".$_SERVER['SERVER_NAME'].":8080".$defaul_uri;
 
 function DB(){
     return ["localhost", "root", "", "penilaian_ma"];
@@ -127,4 +127,24 @@ function DeleteOneData($table, $where){
 
     // Menutup koneksi database
     $conn->close();
+}
+
+function Sub_menu_active($sub_menu){                
+    $string = str_replace("/penilaian-moving-average/app/", "", $_SERVER['REQUEST_URI']);
+    if (strpos($string, $sub_menu) !== false) {
+        return "active";
+    } else {
+        return "";
+    }
+}
+
+function Menu_active($menus){ //$menus array
+    $string = str_replace("/penilaian-moving-average/app/", "", $_SERVER['REQUEST_URI']);
+    $result = "";
+    for($x = 0 ; $x < count($menus); $x ++){
+        if (strpos($string, $menus[$x]) !== false) {
+            $result = "show";
+        }
+    }
+    return $result;
 }

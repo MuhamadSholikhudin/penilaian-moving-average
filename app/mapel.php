@@ -6,7 +6,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Perawatan Page</h1>
+    <h1 class="h3 mb-4 text-gray-800">Mapel Page</h1>
     <?php
     if (isset($_SESSION['message'])) {
     ?>
@@ -23,10 +23,10 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-                <a href="<?= $url ?>/app/perawatan_tambah.php" class="btn btn-info btn-sm btn-circle">
+                <a href="<?= $url ?>/app/mapel_tambah.php" class="btn btn-info btn-sm btn-circle">
                     <i class="fas fa-plus"></i>
                 </a>
-                Data Perawatan
+                Data Mapel
             </h6>
 
         </div>
@@ -34,33 +34,23 @@
             <table id="example" class="display" style="width:100%">
                 <thead>
                     <tr>
-                        <th>NAMA</th>
-                        <th>teknisi</th>
-                        <th>JENIS PERAWATAN</th>
-                        <th>TANGGAL PERAWATAN</th>
-                        <th>KETERANGAN</th>
-                        <th>BIAYA PERAWATAN</th>
+                        <th>KODE PELAJARAN</th>
+                        <th>NAMA PELAJARAN</th>
                         <th>AKSI</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    foreach (QueryManyData("SELECT * FROM perawatan 
-                    LEFT JOIN alat_berat ON perawatan.id_alat_berat = alat_berat.id_alat_berat 
-                    INNER JOIN pengguna ON perawatan.id_pengguna = pengguna.id_pengguna ") as $row) {
+                    foreach (QueryManyData("SELECT * FROM mapel ") as $row) {
                     ?>
                         <tr>
-                            <td><?= $row["nama_alat_berat"] ?></td>
-                            <td><?= $row["username"] ?></td>
-                            <td><?= $row["jenis_perawatan"] ?></td>
-                            <td><?= $row["tanggal_perawatan"] ?></td>     
-                            <td><?= $row["keterangan"] ?></td>
-                            <td><?= $row["biaya_perawatan"] ?></td>
+                            <td><?= $row["kode_pelajaran"] ?></td>
+                            <td><?= $row["nama_pelajaran"] ?></td>
                             <td>
-                                <a href="<?= $url ?>/app/perawatan_edit.php?id_perawatan=<?= $row["id_perawatan"] ?>" class="btn btn-warning btn-sm btn-circle">
+                                <a href="<?= $url ?>/app/mapel_edit.php?id_mapel=<?= $row["id_mapel"] ?>" class="btn btn-warning btn-sm btn-circle">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <button onclick="ConfirmDelete(<?= $row['id_perawatan'] ?>)" class="btn btn-danger btn-sm btn-circle">
+                                <button onclick="ConfirmDelete(<?= $row['id_mapel'] ?>)" class="btn btn-danger btn-sm btn-circle">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>
@@ -77,15 +67,10 @@
             let text = "Apakah Anda Yakin Ingin Menghapus data!\n OK or Cancel.";
             if (confirm(text) == true) {
                 text = "You pressed OK!";
-                window.location.href = "<?= $url ?>/app/aksi/perawatan.php?id_perawatan="+id+"&action=delete";
+                window.location.href = "<?= $url ?>/app/aksi/mapel.php?id_mapel="+id+"&action=delete";
             } 
         }
     </script>
-
-
-
-
-
 </div>
 <!-- /.container-fluid -->
 

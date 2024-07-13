@@ -6,7 +6,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Kriteria Page</h1>
+    <h1 class="h3 mb-4 text-gray-800">Presensi Page</h1>
     <?php
     if (isset($_SESSION['message'])) {
     ?>
@@ -23,10 +23,10 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-                <a href="<?= $url ?>/app/kriteria_tambah.php" class="btn btn-info btn-sm btn-circle">
+                <a href="<?= $url ?>/app/presensi_tambah.php" class="btn btn-info btn-sm btn-circle">
                     <i class="fas fa-plus"></i>
                 </a>
-                Data Kriteria
+                Data Presensi
             </h6>
 
         </div>
@@ -34,23 +34,30 @@
             <table id="example" class="display" style="width:100%">
                 <thead>
                     <tr>
-                        <th>NAMA KRITERIA</th>
-                        <th>DESKRIPSI</th>
+                        <th>NIS</th>
+                        <th>Nama Siswa</th>
+                        <th>Nilai Presensi</th>
+                        <th>Semester</th>
+                        <th>KETERANGAN</th>
                         <th>AKSI</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    foreach (QueryManyData("SELECT * FROM kriteria") as $row) {
+                    foreach (QueryManyData("SELECT * FROM presensi LEFT JOIN siswa ON presensi.nis = siswa.nis 
+                    ") as $row) {
                     ?>
                         <tr>
-                            <td><?= $row["nama_kriteria"] ?></td>  
-                            <td><?= $row["deskripsi"] ?></td>
+                            <td><?= $row["nis"] ?></td>
+                            <td><?= $row["nama_siswa"] ?></td>
+                            <td><?= $row["nilai_presensi"] ?></td>
+                            <td><?= $row["semester"] ?></td>     
+                            <td><?= $row["ket_presensi"] ?></td>
                             <td>
-                                <a href="<?= $url ?>/app/kriteria_edit.php?id_kriteria=<?= $row["id_kriteria"] ?>" class="btn btn-warning btn-sm btn-circle">
+                                <a href="<?= $url ?>/app/presensi_edit.php?id_presensi=<?= $row["id_presensi"] ?>" class="btn btn-warning btn-sm btn-circle">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <button onclick="ConfirmDelete(<?= $row['id_kriteria'] ?>)" class="btn btn-danger btn-sm btn-circle">
+                                <button onclick="ConfirmDelete(<?= $row['id_presensi'] ?>)" class="btn btn-danger btn-sm btn-circle">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>
@@ -67,7 +74,7 @@
             let text = "Apakah Anda Yakin Ingin Menghapus data!\n OK or Cancel.";
             if (confirm(text) == true) {
                 text = "You pressed OK!";
-                window.location.href = "<?= $url ?>/app/aksi/kriteria.php?id_kriteria="+id+"&action=delete";
+                window.location.href = "<?= $url ?>/app/aksi/presensi.php?id_presensi="+id+"&action=delete";
             } 
         }
     </script>

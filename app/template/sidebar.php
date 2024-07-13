@@ -1,32 +1,12 @@
         <?php 
-            function Sub_menu_active($sub_menu){
-                $string = $_SERVER['REQUEST_URI'];
-                if (strpos($string, $sub_menu) !== false) {
-                    return "active";
-                } else {
-                    return "";
-                }
-            }
-
-            function Menu_active($menus){ //$menus array
-                $string = $_SERVER['REQUEST_URI'];
-                $result = "";
-                for($x = 0 ; $x < count($menus); $x ++){
-                    if (strpos($string, $menus[$x]) !== false) {
-                        $result = "show";
-                    }
-                }
-                return $result;
-            }
-
             // Data sub menu pada menu 
             $access = ["pengguna"];
-            $data_master = [ "siswa", "mapel", "guru"];
-            $result = [ "presensi", "penilaian", "raport", "skbm"];
+            $data_master = [ "siswa", "mapel", "pegawai"];
+            $result = [ "presensi", "nilai", "raport", "skbm"];
 
             // Hak Akses memiliku sub menu
             $hakakses = [
-                1 => ["pengguna", "siswa", "mapel", "guru","presensi", "penilaian","raport", "skbm"],
+                1 => ["pengguna", "siswa", "mapel", "pegawai","presensi", "nilai","raport", "skbm"],
                 2 => ["siswa"],
                 3 => ["mapel"]
             ];
@@ -68,7 +48,7 @@
                 </a>
                 <div id="collapseOne" class="collapse <?= Menu_active($access) ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Akses:</h6>
+                        <!-- <h6 class="collapse-header">Custom Akses:</h6> -->
                         <?php for($sub = 0; $sub < count($access); $sub++){       
                             $check_role = array_search($access[$sub], $hakakses[$_SESSION['hakakses']]); 
                             if ($check_role !== false) {                                          
@@ -88,7 +68,7 @@
                 </a>
                 <div id="collapseTwo" class="collapse <?= Menu_active($data_master) ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Data Master:</h6>
+                        <!-- <h6 class="collapse-header">Custom Data Master:</h6> -->
                         <?php for($sub = 0; $sub < count($data_master); $sub++){       
                             $check_role = array_search($data_master[$sub], $hakakses[$_SESSION['hakakses']]); 
                             if ($check_role !== false) {                                          
@@ -108,7 +88,7 @@
                 </a>
                 <div id="collapseThree" class="collapse <?= Menu_active($result) ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Hasil:</h6>
+                        <!-- <h6 class="collapse-header">Custom Hasil:</h6> -->
                         <?php for($sub = 0; $sub < count($result); $sub++){       
                             $check_role = array_search($result[$sub], $hakakses[$_SESSION['hakakses']]); 
                             if ($check_role !== false) {                                          
