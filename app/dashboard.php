@@ -17,12 +17,12 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                <a href="<?= $url ?>/app/pengguna.php">Data Pengguna</a>
+                                <a href="<?= $url ?>/app/user.php">Data User</a>
                                 </div>
                             <?php
-                            $pengguna = QueryOnedata("SELECT COUNT(*) as jumlah FROM pengguna ")->fetch_assoc();
+                            $user = QueryOnedata("SELECT COUNT(*) as jumlah FROM user ")->fetch_assoc();
                             ?>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $pengguna['jumlah'] ?></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $user['jumlah'] ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-users fa-2x text-gray-300"></i>

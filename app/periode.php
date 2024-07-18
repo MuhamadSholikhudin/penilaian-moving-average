@@ -6,7 +6,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Perbandingan Page</h1>
+    <h1 class="h3 mb-4 text-gray-800">Periode Page</h1>
     <?php if (isset($_SESSION['message'])) { ?>
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <strong>Success !</strong> <?= $_SESSION['message'] ?>
@@ -18,10 +18,10 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-                <a href="<?= $url ?>/app/perbandingan_tambah.php" class="btn btn-info btn-sm btn-circle">
+                <a href="<?= $url ?>/app/periode_tambah.php" class="btn btn-info btn-sm btn-circle">
                     <i class="fas fa-plus"></i>
                 </a>
-                Data Perbandingan
+                Data Periode
             </h6>
 
         </div>
@@ -29,33 +29,23 @@
             <table id="example" class="display" style="width:100%">
                 <thead>
                     <tr>
-                        <th>SUB KRITERIA</th>
-                        <th>SUB KRITERIA</th>
-                        <th>NILAI</th>
+                        <th>NAMA PERIODE</th>
+                        <th>STATUS PERIODE</th>
                         <th>AKSI</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach (  QueryManyData('SELECT * FROM perbandingan ')  as $row ) { ?>
+                    <?php foreach (  QueryManyData('SELECT * FROM periode ')  as $row ) { ?>
                         <tr>
-                            <td>
-                            <?php
-                                $sub_kriteria1 = QueryOnedata('SELECT * FROM sub_kriteria WHERE id_sub_kriteria = '.$row['sub_kriteria1'] .' ')->fetch_assoc();
-                                echo $sub_kriteria1['sub_kriteria'];
-                            ?>
+                            <td><?= $row['nm_periode']; ?>
                             </td>  
-                            <td>
-                            <?php
-                                $sub_kriteria2 = QueryOnedata('SELECT * FROM sub_kriteria WHERE id_sub_kriteria = '.$row['sub_kriteria2'] .' ')->fetch_assoc();
-                                echo $sub_kriteria2['sub_kriteria'];
-                            ?>
+                            <td><?= $row['status_periode']; ?>
                             </td>                            
-                            <td><?= $row['nilai'] ?></td>
-                            <td><a href="<?= $url ?>/app/perbandingan_edit.php?id_perbandingan=<?= $row['id_perbandingan'] ?>" class="btn btn-warning btn-sm btn-circle">
+                            <td><a href="<?= $url ?>/app/periode_edit.php?id_periode=<?= $row['id_periode'] ?>" class="btn btn-warning btn-sm btn-circle">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <button onclick="ConfirmDelete(<?= $row[
-                                    'id_perbandingan'
+                                    'id_periode'
                                 ] ?>)" class="btn btn-danger btn-sm btn-circle">
                                     <i class="fas fa-trash"></i>
                                 </button>
@@ -71,7 +61,7 @@
             let text = "Apakah Anda Yakin Ingin Menghapus data!\n OK or Cancel.";
             if (confirm(text) == true) {
                 text = "You pressed OK!";
-                window.location.href = "<?= $url ?>/app/aksi/perbandingan.php?id_perbandingan="+id+"&action=delete";
+                window.location.href = "<?= $url ?>/app/aksi/periode.php?id_periode="+id+"&action=delete";
             } 
         }
     </script>

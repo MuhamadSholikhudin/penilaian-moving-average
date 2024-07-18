@@ -3,7 +3,7 @@
 <?php include_once './template/navbar.php'; ?>
 
 <?php 
-$siswa = QueryOnedata("SELECT * FROM siswa WHERE nis = ".$_GET['nis']." ")->fetch_assoc();
+$siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = ".$_GET['id_siswa']." ")->fetch_assoc();
 ?>
 
 <!-- Begin Page Content -->
@@ -21,70 +21,100 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE nis = ".$_GET['nis']." ")->fetc
         </div>
         <div class="card-body">
             <form action="<?= $url ?>/app/aksi/siswa.php" method="POST" enctype="multipart/form-data">
-                <div class="mb-3 row">
-                    <label for="nis" class="col-sm-2 col-form-label">NIS</label>
+            <input type="hidden" class="form-control" id="id_siswa" name="id_siswa" value="<?= $siswa['id_siswa'] ?>" required>
+
+            <div class="mb-3 row">
+                    <label for="nis" class="col-sm-2 col-form-label">Nomor Induk Siswa</label>
                     <div class="col-sm-10">
-                    <input type="number" class="form-control" id="inputusername" name="nis" value="<?= $siswa['nis'] ?>" required>
-                    </div>
-                </div>                
-                <div class="mb-3 row">
-                    <label for="nama_siswa" class="col-sm-2 col-form-label">Nama Siswa</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nama_siswa" name="nama_siswa" value="<?= $siswa['nama_siswa'] ?>" required>
-                    </div>
-                </div>                
-                 <div class="mb-3 row">
-                    <label for="tgl_lahir" class="col-sm-2 col-form-label">Tanggal Lahir</label>
-                    <div class="col-sm-10">
-                        <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" value="<?= $siswa['tgl_lahir'] ?>" required>
+                        <input type="number" class="form-control" id="nis" name="nis" value="<?= $siswa['nis'] ?>" required>
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="kelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
+                    <label for="nm_siswa" class="col-sm-2 col-form-label">Nama Siswa</label>
                     <div class="col-sm-10">
-                        <select  class="form-control" name="kelamin" id="kelamin">
-                            <?php $kelamin = ['L' => 'Laki-Laki', 'P' => 'Perempuan']; ?>
-                            <?php foreach($kelamin as $key => $val){ ?>
-                                <?php if($key == $siswa['kelamin']) { ?>
+                        <input type="text" class="form-control" id="nm_siswa" name="nm_siswa" value="<?= $siswa['nm_siswa'] ?>" required>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="tgl_lahir_siswa" class="col-sm-2 col-form-label">Tanggal Lahir</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control" id="tgl_lahir_siswa" name="tgl_lahir_siswa" value="<?= $siswa['tgl_lahir_siswa'] ?>" required>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="jk_siswa" class="col-sm-2 col-form-label">Jenis Kelamin</label>
+                    <div class="col-sm-10">
+                        <select  class="form-control" name="jk_siswa" id="jk_siswa">
+                        <?php $kelamin = ['L' => 'Laki-Laki', 'P' => 'Perempuan']; ?>
+                            <?php foreach($kelamin as $key => $val){
+                                if($val == $siswa['jk_siswa']){
+                                    ?>
                                     <option value="<?= $key ?>" selected><?= $val ?></option>
-                                    <?php } else { ?>
-                                        <option value="<?= $key ?>"><?= $val ?></option>
-                                    <?php } ?>
+                                <?php } else {
+                                ?>
+                                <option value="<?= $key ?>"><?= $val ?></option>
+                            <?php } }
+                            ?>
+                        </select>
+                        
+                    </div>                
+                </div>
+                <div class="mb-3 row">
+                    <label for="kelas" class="col-sm-2 col-form-label">Kelas</label>
+                    <div class="col-sm-10">
+                        <select  class="form-control" name="id_kelas" id="kelas">
+                        <?php
+                        foreach (QueryManyData("SELECT * FROM kelas") as $row) {
+                        ?>
+                            <option value="<?= $row['id_kelas'] ?>"><?= $row['kelas'] ?></option>
                             <?php } ?>
                         </select>
                     </div>                
                 </div>
                 <div class="mb-3 row">
-                    <label for="agama" class="col-sm-2 col-form-label">Agama</label>
+                    <label for="no_hp" class="col-sm-2 col-form-label">Nomer HP</label>
                     <div class="col-sm-10">
-                        <select  class="form-control" name="agama" id="agama">
-                            <option value="ISLAM">ISLAM</option>
-                            <option value="KRISTEN">KRISTEN</option>
-                            <option value="BUDDHA">BUDDHA</option>
-                            <option value="HINDU">HINDU</option>
-                            <option value="KATOLIK">KATOLIK</option>
+                        <input type="text" class="form-control" id="no_hp" name="no_hp" value="<?= $siswa['no_hp'] ?>" required>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="nm_wali" class="col-sm-2 col-form-label">Nama Wali</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="nm_wali" name="nm_wali" value="<?= $siswa['nm_wali'] ?>" required>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="status" class="col-sm-2 col-form-label">Status</label>
+                    <div class="col-sm-10">
+                        <?php 
+                            $status = [
+                                "Aktif",
+                                "Tidak Aktif",
+                            ];
+                        ?>
+                        <select class="form-control" name="status_siswa" id="status">
+                            <?php
+                            foreach($status as $val) {       
+                                if($val == $siswa['status_siswa']){
+                                    ?>
+                                    <option value="<?= $val ?>" selected><?= $val ?></option>
+                                <?php
+                                }else{
+                                    ?>
+                                    <option value="<?= $val ?>"><?= $val ?></option>
+                                <?php
+                                }                          
+                                                                                                             
+                            }
+                            ?>
                         </select>
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="kelas" class="col-sm-2 col-form-label">Kelas</label>
+                    <label for="alamat_siswa" class="col-sm-2 col-form-label">Alamat Siswa</label>
                     <div class="col-sm-10">
-                        <select  class="form-control" name="kelas" id="kelas">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
-                    </div>                
-                </div>
-                <div class="mb-3 row">
-                    <label for="kelas_kategori" class="col-sm-2 col-form-label">Kelas kategori</label>
-                    <div class="col-sm-10">
-                        <select  class="form-control" name="kelas_kategori" id="kelas_kategori">
-                            <option value="IPA">IPA</option>
-                            <option value="IPS">IPS</option>
-                            <option value="BAHASA">BAHASA</option>
-                        </select>
-                    </div>                
+                        <input type="text" class="form-control" id="alamat_siswa" name="alamat_siswa" value="<?= $siswa['alamat_siswa'] ?>" required>
+                    </div>
                 </div>
                 <div class="mb-3 row">
                     <button type="submit" name="updatesiswa" value="updatesiswa" class="btn btn-success btn-user btn-block">

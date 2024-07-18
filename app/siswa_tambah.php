@@ -26,58 +26,81 @@
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="nama_siswa" class="col-sm-2 col-form-label">Nama Siswa</label>
+                    <label for="nm_siswa" class="col-sm-2 col-form-label">Nama Siswa</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nama_siswa" name="nama_siswa" required>
+                        <input type="text" class="form-control" id="nm_siswa" name="nm_siswa" required>
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="tgl_lahir" class="col-sm-2 col-form-label">Tanggal Lahir</label>
+                    <label for="tgl_lahir_siswa" class="col-sm-2 col-form-label">Tanggal Lahir</label>
                     <div class="col-sm-10">
-                        <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" required>
+                        <input type="date" class="form-control" id="tgl_lahir_siswa" name="tgl_lahir_siswa" required>
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="kelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
+                    <label for="jk_siswa" class="col-sm-2 col-form-label">Jenis Kelamin</label>
                     <div class="col-sm-10">
-                        <select  class="form-control" name="kelamin" id="kelamin">
-                            <option value="L">Laki-Laki</option>
-                            <option value="P">Perempuan</option>
+                        <select  class="form-control" name="jk_siswa" id="jk_siswa">
+                        <?php $kelamin = ['L' => 'Laki-Laki', 'P' => 'Perempuan']; ?>
+                            <?php foreach($kelamin as $key => $val){ ?>
+                                <option value="<?= $key ?>"><?= $val ?></option>
+                            <?php } ?>
                         </select>
+                        
                     </div>                
-                </div>
-                <div class="mb-3 row">
-                    <label for="agama" class="col-sm-2 col-form-label">Agama</label>
-                    <div class="col-sm-10">
-                        <select  class="form-control" name="agama" id="agama">
-                            <option value="ISLAM">ISLAM</option>
-                            <option value="KRISTEN">KRISTEN</option>
-                            <option value="BUDDHA">BUDDHA</option>
-                            <option value="HINDU">HINDU</option>
-                            <option value="KATOLIK">KATOLIK</option>
-                        </select>
-                    </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="kelas" class="col-sm-2 col-form-label">Kelas</label>
                     <div class="col-sm-10">
-                        <select  class="form-control" name="kelas" id="kelas">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
+                        <select  class="form-control" name="id_kelas" id="kelas">
+                        <?php
+                        foreach (QueryManyData("SELECT * FROM kelas") as $row) {
+                        ?>
+                            <option value="<?= $row['id_kelas'] ?>"><?= $row['kelas'] ?></option>
+                            <?php } ?>
                         </select>
                     </div>                
                 </div>
                 <div class="mb-3 row">
-                    <label for="kelas_kategori" class="col-sm-2 col-form-label">Kelas kategori</label>
+                    <label for="no_hp" class="col-sm-2 col-form-label">Nomer HP</label>
                     <div class="col-sm-10">
-                        <select  class="form-control" name="kelas_kategori" id="kelas_kategori">
-                            <option value="IPA">IPA</option>
-                            <option value="IPS">IPS</option>
-                            <option value="BAHASA">BAHASA</option>
-                        </select>
-                    </div>                
+                        <input type="text" class="form-control" id="no_hp" name="no_hp" required>
+                    </div>
                 </div>
+                <div class="mb-3 row">
+                    <label for="nm_wali" class="col-sm-2 col-form-label">Nama Wali</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="nm_wali" name="nm_wali" required>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="status" class="col-sm-2 col-form-label">Status</label>
+                    <div class="col-sm-10">
+                        <?php 
+                            $status = [
+                                "Aktif",
+                                "Tidak Aktif",
+                            ];
+                        ?>
+                        <select class="form-control" name="status_siswa" id="status">
+                            <?php
+                            foreach($status as $val) {                                
+                            ?>
+                                <option value="<?= $val ?>"><?= $val ?></option>
+                            <?php
+                                                          
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="alamat_siswa" class="col-sm-2 col-form-label">Alamat Siswa</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="alamat_siswa" name="alamat_siswa" required>
+                    </div>
+                </div>
+
                 <div class="mb-3 row">
                     <button type="submit" name="simpansiswa" value="simpansiswa" class="btn btn-primary btn-user btn-block">
                         <i class="fas fa-save"></i> SIMPAN

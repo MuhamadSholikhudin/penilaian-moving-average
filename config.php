@@ -1,6 +1,6 @@
 <?php
 $defaul_uri = "/penilaian-moving-average";
-$url = "http://".$_SERVER['SERVER_NAME'].":8080".$defaul_uri;
+$url = "http://".$_SERVER['SERVER_NAME'].$defaul_uri;
 
 function DB(){
     return ["localhost", "root", "", "penilaian_ma"];

@@ -1,4 +1,4 @@
-CREATE DATABASE fz
+CREATE DATABASE penilaian_ma
 
 CREATE TABLE `pengguna` (		
     `id_pengguna` int(11) NOT NULL AUTO_INCREMENT,
@@ -44,3 +44,121 @@ CREATE TABLE `presensi` (
  `ket_presensi` varchar(100) DEFAULT NULL,
  PRIMARY KEY (`id_presensi`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4
+
+///================ ULYA ===============================
+
+CREATE DATABASE penilaian_ma
+
+CREATE TABLE `user` (		
+    `id_user` int(11) NOT NULL AUTO_INCREMENT,
+    `username` varchar(100) DEFAULT NULL,
+    `password` varchar(100) DEFAULT NULL,
+    `nm_pengguna` varchar(100) DEFAULT NULL,
+    `level` varchar(11) DEFAULT NULL,
+    `status` varchar(10) DEFAULT NULL,
+    PRIMARY KEY (`id_user`)
+);
+
+CREATE TABLE `periode` (
+ `id_periode` int(11) NOT NULL AUTO_INCREMENT,
+ `nm_periode` varchar(50) DEFAULT NULL,
+ `status_periode` varchar(10) DEFAULT NULL,
+ PRIMARY KEY (`id_periode`)
+);
+
+CREATE TABLE `kelas` (
+ `id_kelas` int(11) NOT NULL AUTO_INCREMENT,
+ `nm_kelas` varchar(50) DEFAULT NULL,
+ `kelas` int(2) DEFAULT NULL,
+ PRIMARY KEY (`id_kelas`)
+);
+
+CREATE TABLE `guru` (
+ `id_guru` int(11) NOT NULL AUTO_INCREMENT,
+ `nip` int(11) NOT NULL,
+ `nm_guru` varchar(30) NOT NULL,
+ `alamat_guru` text DEFAULT NULL,
+ `jk_guru` enum('L','P') NOT NULL,
+ `tgl_lahir` date DEFAULT NULL,
+ `no_hp_guru` varchar(13) DEFAULT NULL,
+ `foto` text DEFAULT NULL,
+ PRIMARY KEY (`id_guru`)
+);
+
+CREATE TABLE `siswa` (
+ `id_siswa` int(11) NOT NULL AUTO_INCREMENT,
+ `nis` varchar(15) NOT NULL,
+ `nm_siswa` varchar(20) DEFAULT NULL,
+ `id_kelas` int(11) NOT NULL,
+ `alamat_siswa` text DEFAULT NULL,
+ `jk_siswa` enum('L','P') NOT NULL,
+ `tgl_lahir_siswa` date DEFAULT NULL,
+ `no_hp` varchar(20) NOT NULL,
+ `nm_wali` varchar(100) DEFAULT NULL,
+ `status_siswa` varchar(10) DEFAULT NULL,
+ PRIMARY KEY (`nis`)
+);
+
+CREATE TABLE `mapel` (
+ `id_mapel` int(11) NOT NULL AUTO_INCREMENT,
+ `id_periode` int(11) NOT NULL,
+ `nm_mapel` varchar(50) DEFAULT NULL,
+ PRIMARY KEY (`id_mapel`)
+);
+
+CREATE TABLE `ekstra` (
+ `id_ekstra` int(11) NOT NULL AUTO_INCREMENT,
+ `id_periode` int(11) NOT NULL,
+ `nm_ekstra` varchar(30) NOT NULL,
+ `penanggung_jawab` varchar(50) NOT NULL,
+ PRIMARY KEY (`id_ekstra`)
+) 
+
+CREATE TABLE `jadwal_siswa` (
+ `id_jadwal_siswa` int(11) NOT NULL AUTO_INCREMENT,
+ `id_siswa` int(11) NOT NULL,
+ `id_mapel` int(11) NOT NULL,
+ `id_guru` int(11) NOT NULL,
+ `hari` varchar(10) DEFAULT NULL,
+ `waktu_awal` timestamps DEFAULT NULL,
+ `waktu_akhir` timestamps DEFAULT NULL,
+ PRIMARY KEY (`id_jadwal_siswa`)
+);
+
+CREATE TABLE `ekstra_siswa` (
+ `id_ekstra_siswa` int(11) NOT NULL AUTO_INCREMENT,
+ `id_ekstra` int(11) NOT NULL,
+ `id_siswa` int(11) NOT NULL,
+ PRIMARY KEY (`id_ekstra_siswa`)
+);
+
+CREATE TABLE `kehadiran_siswa` (
+ `id_kehadiran` int(11) NOT NULL AUTO_INCREMENT,
+ `id_siswa` int(11) NOT NULL,
+ `tgl_masuk` date DEFAULT NULL,
+ `jam_masuk` date DEFAULT NULL,
+ `jam_masuk` date DEFAULT NULL,
+ `status` enum('Masuk','Tidak Masuk', 'Izin') NOT NULL,
+ `keterangan` varchar(100) DEFAULT NULL,
+ PRIMARY KEY (`id_kehadiran`)
+);
+
+
+CREATE TABLE `nilai_mapel` (
+ `id_nilai_mapel` int(11) NOT NULL AUTO_INCREMENT,
+ `id_siswa` int(11) NOT NULL,
+ `id_jadwal` int(11) NOT NULL,
+ `nilai` int(11) DEFAULT NULL,
+ `ket_nilai` varchar(50) DEFAULT NULL,
+ PRIMARY KEY (`id_nilai_mapel`)
+);
+
+
+CREATE TABLE `nilai_ekstra` (
+ `id_nilai_ekstra` int(11) NOT NULL AUTO_INCREMENT,
+ `id_siswa` int(11) NOT NULL,
+ `id_ekstra_siswa` int(11) NOT NULL,
+ `nilai` int(11) DEFAULT NULL,
+ `ket_nilai` varchar(50) DEFAULT NULL,
+ PRIMARY KEY (`id_nilai_mapel`)
+);

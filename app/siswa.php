@@ -34,11 +34,15 @@
             <table id="example" class="display" style="width:100%">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>NIS</th>
                         <th>NAMA</th>
-                        <th>TIPE</th>
-                        <th>TAHUN PEMBUATAN</th>
-                        <th>DESKRIPSI</th>
+                        <th>KELAS</th>
+                        <th>TANGGAL LAHIR</th>
+                        <th>JENIS KELAMIN</th>
+                        <th>NO HP</th>
+                        <th>NAMA WALI</th>
+                        <th>STATUS SISWA</th>
+                        <th>ALAMAT SISWA</th>
                         <th>AKSI</th>
                     </tr>
                 </thead>
@@ -48,15 +52,19 @@
                     ?>
                         <tr>
                             <td><?= $row["nis"] ?></td>
-                            <td><?= $row["nama_siswa"] ?></td>
-                            <td><?= $row["tgl_lahir"] ?></td>
-                            <td><?= $row["kelas"] ?></td>     
-                            <td><?= $row["agama"] ?></td>
+                            <td><?= $row["nm_siswa"] ?></td>
+                            <td><?= $row["id_kelas"] ?></td>     
+                            <td><?= $row["tgl_lahir_siswa"] ?></td>
+                            <td><?= $row["jk_siswa"] ?></td>
+                            <td><?= $row["no_hp"] ?></td>
+                            <td><?= $row["nm_wali"] ?></td>
+                            <td><?= $row["status_siswa"] ?></td>
+                            <td><?= $row["alamat_siswa"] ?></td>
                             <td>
-                                <a href="<?= $url ?>/app/siswa_edit.php?nis=<?= $row["nis"] ?>" class="btn btn-warning btn-sm btn-circle">
+                                <a href="<?= $url ?>/app/siswa_edit.php?id_siswa=<?= $row["id_siswa"] ?>" class="btn btn-warning btn-sm btn-circle">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <button onclick="ConfirmDelete(<?= $row['nis'] ?>)" class="btn btn-danger btn-sm btn-circle">
+                                <button onclick="ConfirmDelete(<?= $row['id_siswa'] ?>)" class="btn btn-danger btn-sm btn-circle">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>

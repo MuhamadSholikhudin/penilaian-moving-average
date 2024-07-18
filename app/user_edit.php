@@ -3,7 +3,7 @@
 <?php include_once './template/navbar.php'; ?>
 
 <?php 
-$pengguna = QueryOnedata("SELECT * FROM pengguna WHERE id_pengguna = ".$_GET['id_pengguna']." ")->fetch_assoc();
+$user = QueryOnedata("SELECT * FROM user WHERE id_user = ".$_GET['id_user']." ")->fetch_assoc();
 ?>
 
 <!-- Begin Page Content -->
@@ -15,54 +15,51 @@ $pengguna = QueryOnedata("SELECT * FROM pengguna WHERE id_pengguna = ".$_GET['id
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-                <a href="<?= $url ?>/app/pengguna.php" class="btn btn-info btn-sm btn-circle">
+                <a href="<?= $url ?>/app/user.php" class="btn btn-info btn-sm btn-circle">
                     <i class="fas fa-arrow-left"></i>
                 </a>
                 Edit Data Pengguna
             </h6>
         </div>
         <div class="card-body">
-            <form action="<?= $url ?>/app/aksi/pengguna.php" method="POST" enctype="multipart/form-data">
-                <input type="hidden" class="form-control" id="inputusername" name="id_pengguna" value="<?= $pengguna['id_pengguna'] ?>" required>
+            <form action="<?= $url ?>/app/aksi/user.php" method="POST" enctype="multipart/form-data">
+                <input type="hidden" class="form-control" id="inputusername" name="id_user" value="<?= $user['id_user'] ?>" required>
                 <div class="mb-3 row">
                     <label for="inputusername" class="col-sm-2 col-form-label">Username</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputusername" name="username" value="<?= $pengguna['username'] ?>" required>
+                        <input type="text" class="form-control" id="inputusername" name="username" value="<?= $user['username'] ?>" required>
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="inputPassword" name="password" value="<?= $pengguna['password'] ?>" required>
+                        <input type="password" class="form-control" id="inputPassword" name="password" value="<?= $user['password'] ?>" required>
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="inputname" class="col-sm-2 col-form-label">Name</label>
+                    <label for="inputname" class="col-sm-2 col-form-label">Nama</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputname" name="name" value="<?= $pengguna['name'] ?>" required>
+                        <input type="text" class="form-control" id="inputname" name="nm_pengguna" value="<?= $user['nm_pengguna'] ?>" required>
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="inputhakses" class="col-sm-2 col-form-label">Hak Akses</label>
                     <div class="col-sm-10">
                         <?php 
-                            $hakakses = [
-                                1 => "Super Admin",
-                                2 => "Admin",
-                                3 => "Operator",
-                                4 => "Teknisi",
+                            $level = [
+                                "wakasiswa",  "guru mapel"
                             ];
                         ?>
-                        <select class="form-control" name="hakakses" id="inputhakses">
+                        <select class="form-control" name="level" id="inputhakses">
                             <?php
-                            foreach($hakakses as $key => $val) {
-                                if($key == $user['hakakses']){
+                            foreach($level as  $val) {
+                                if($val == $user['level']){
                                     ?>
-                                    <option value="<?= $key ?>" selected><?= $val ?></option>
+                                    <option value="<?= $val ?>" selected><?= $val ?></option>
                                 <?php
                                 }else{
                                     ?>
-                                    <option value="<?= $key ?>"><?= $val ?></option>
+                                    <option value="<?= $val ?>"><?= $val ?></option>
                                 <?php
                                 }                            
                             }
@@ -82,7 +79,7 @@ $pengguna = QueryOnedata("SELECT * FROM pengguna WHERE id_pengguna = ".$_GET['id
                         <select class="form-control" name="status" id="inputhakses">
                             <?php
                             foreach($status as $val) {
-                                if($val == $pengguna['status']){
+                                if($val == $user['status']){
                                     ?>
                                     <option value="<?= $val ?>" selected><?= $val ?></option>
                                 <?php

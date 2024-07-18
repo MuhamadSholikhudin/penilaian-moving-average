@@ -1,14 +1,14 @@
         <?php 
             // Data sub menu pada menu 
-            $access = ["pengguna"];
-            $data_master = [ "siswa", "mapel", "pegawai"];
-            $result = [ "presensi", "nilai", "raport", "skbm"];
+            $access = ["user"];
+            $data_master = [ "siswa", "mapel", "guru","periode", "kelas", "ekstra",];
+            $result = [  "jadwal_siswa"];
 
             // Hak Akses memiliku sub menu
-            $hakakses = [
-                1 => ["pengguna", "siswa", "mapel", "pegawai","presensi", "nilai","raport", "skbm"],
-                2 => ["siswa"],
-                3 => ["mapel"]
+            $level = [
+                'wakasiswa' => ["user", "siswa", "mapel", "guru","periode", "kelas","ekstra", "jadwal_siswa"],
+                'guru' => ["siswa", "mapel"],
+                
             ];
         ?> 
         <!-- Sidebar -->
@@ -50,7 +50,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Akses:</h6> -->
                         <?php for($sub = 0; $sub < count($access); $sub++){       
-                            $check_role = array_search($access[$sub], $hakakses[$_SESSION['hakakses']]); 
+                            $check_role = array_search($access[$sub], $level[$_SESSION['level']]); 
                             if ($check_role !== false) {                                          
                             ?>
                             <a class="collapse-item <?= Sub_menu_active($access[$sub]) ?>" href="<?= $url ?>/app/<?= $access[$sub] ?>.php"><?= str_replace("_"," ", $access[$sub]); ?></a>
@@ -70,7 +70,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Data Master:</h6> -->
                         <?php for($sub = 0; $sub < count($data_master); $sub++){       
-                            $check_role = array_search($data_master[$sub], $hakakses[$_SESSION['hakakses']]); 
+                            $check_role = array_search($data_master[$sub], $level[$_SESSION['level']]); 
                             if ($check_role !== false) {                                          
                             ?>
                             <a class="collapse-item <?= Sub_menu_active($data_master[$sub]) ?>" href="<?= $url ?>/app/<?= $data_master[$sub] ?>.php"><?= str_replace("_"," ", $data_master[$sub]); ?></a>
@@ -90,7 +90,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <!-- <h6 class="collapse-header">Custom Hasil:</h6> -->
                         <?php for($sub = 0; $sub < count($result); $sub++){       
-                            $check_role = array_search($result[$sub], $hakakses[$_SESSION['hakakses']]); 
+                            $check_role = array_search($result[$sub], $level[$_SESSION['level']]); 
                             if ($check_role !== false) {                                          
                             ?>
                             <a class="collapse-item <?= Sub_menu_active($result[$sub]) ?>" href="<?= $url ?>/app/<?= $result[$sub] ?>.php"><?= str_replace("_"," ", $result[$sub]); ?></a>

@@ -6,7 +6,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Sub Kriteria Page</h1>
+    <h1 class="h3 mb-4 text-gray-800">Kelas Page</h1>
     <?php
     if (isset($_SESSION['message'])) {
     ?>
@@ -23,10 +23,10 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-                <a href="<?= $url ?>/app/sub_kriteria_tambah.php" class="btn btn-info btn-sm btn-circle">
+                <a href="<?= $url ?>/app/kelas_tambah.php" class="btn btn-info btn-sm btn-circle">
                     <i class="fas fa-plus"></i>
                 </a>
-                Data Sub Kriteria
+                Data Kelas
             </h6>
 
         </div>
@@ -34,25 +34,23 @@
             <table id="example" class="display" style="width:100%">
                 <thead>
                     <tr>
-                        <th>NAMA KRITERIA</th>
-                        <th>SUB KRITERIA</th>
-                        <th>DESKRIPSI</th>
+                        <th>NAMA KELAS</th>
+                        <th>KELAS</th>
                         <th>AKSI</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    foreach (QueryManyData("SELECT * FROM sub_kriteria LEFT JOIN kriteria ON  sub_kriteria.id_kriteria = kriteria.id_kriteria") as $row) {
+                    foreach (QueryManyData("SELECT * FROM kelas") as $row) {
                     ?>
                         <tr>
-                            <td><?= $row["nama_kriteria"] ?></td>  
-                            <td><?= $row["sub_kriteria"] ?></td>  
-                            <td><?= $row["deskripsi"] ?></td>
+                            <td><?= $row["nm_kelas"] ?></td>  
+                            <td><?= $row["kelas"] ?></td>  
                             <td>
-                                <a href="<?= $url ?>/app/sub_kriteria_edit.php?id_sub_kriteria=<?= $row["id_sub_kriteria"] ?>" class="btn btn-warning btn-sm btn-circle">
+                                <a href="<?= $url ?>/app/kelas_edit.php?id_kelas=<?= $row["id_kelas"] ?>" class="btn btn-warning btn-sm btn-circle">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <button onclick="ConfirmDelete(<?= $row['id_sub_kriteria'] ?>)" class="btn btn-danger btn-sm btn-circle">
+                                <button onclick="ConfirmDelete(<?= $row['id_kelas'] ?>)" class="btn btn-danger btn-sm btn-circle">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>
@@ -69,7 +67,7 @@
             let text = "Apakah Anda Yakin Ingin Menghapus data!\n OK or Cancel.";
             if (confirm(text) == true) {
                 text = "You pressed OK!";
-                window.location.href = "<?= $url ?>/app/aksi/sub_kriteria.php?id_sub_kriteria="+id+"&action=delete";
+                window.location.href = "<?= $url ?>/app/aksi/kelas.php?id_kelas="+id+"&action=delete";
             } 
         }
     </script>

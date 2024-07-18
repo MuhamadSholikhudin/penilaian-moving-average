@@ -3,15 +3,15 @@ include '../../config.php';
 session_start();
 
 if(isset($_POST)){
-        $query = "SELECT * FROM pengguna WHERE username = '".$_POST['username']."' AND password = '".$_POST['password']."'";
+        $query = "SELECT * FROM user WHERE username = '".$_POST['username']."' AND password = '".$_POST['password']."' AND status = 'active' ";
         $login = QueryOnedata($query);
         if($login->num_rows > 0 ){
                 $row = $login-> fetch_assoc();               
                 $_SESSION['login'] = true;
-                $_SESSION['id_pengguna'] = $row['id_pengguna'];
+                $_SESSION['id_user'] = $row['id_user'];
                 $_SESSION['username'] = $row['username'];
-                $_SESSION['name'] = $row['name'];
-                $_SESSION['hakakses'] = $row['hakakses'];
+                $_SESSION['n_pengguna'] = $row['n_pengguna'];
+                $_SESSION['level'] = $row['level'];
                 header("Location: ".$url."/app/dashboard.php");
                 exit(); 
         }else{
