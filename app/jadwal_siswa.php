@@ -6,7 +6,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Pegawai Page</h1>
+    <h1 class="h3 mb-4 text-gray-800">Jadwal Siswa Page</h1>
     <?php
     if (isset($_SESSION['message'])) {
     ?>
@@ -23,10 +23,10 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-                <a href="<?= $url ?>/app/pegawai_tambah.php" class="btn btn-info btn-sm btn-circle">
+                <a href="<?= $url ?>/app/jadwal_siswa_tambah.php" class="btn btn-info btn-sm btn-circle">
                     <i class="fas fa-plus"></i>
                 </a>
-                Data Pegawai
+                Data Jadwal Siswa
             </h6>
 
         </div>
@@ -34,27 +34,38 @@
             <table id="example" class="display" style="width:100%">
                 <thead>
                     <tr>
-                        <th>NIP</th>
-                        <th>Nama Pegawai</th>
-                        <th>Jabatan</th>
-                        <th>Pendidikan</th>
+                        <th>Siswa</th>
+                        <th>Mapel</th>
+                        <th>Guru</th>
+                        <th>Hari</th>
+                        <th>Waktu Awal</th>
+                        <th>Waktu Akhir</th>
                         <th>AKSI</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    foreach (QueryManyData("SELECT * FROM pegawai") as $row) {
+                    foreach (QueryManyData("SELECT * FROM jadwal_siswa ") as $row) {
+                        $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $row['id_siswa'] . " ")->fetch_assoc();
+                        $mapel = QueryOnedata("SELECT * FROM mapel WHERE id_mapel = " . $row['id_mapel'] . " ")->fetch_assoc();
+                        $guru = QueryOnedata("SELECT * FROM guru WHERE id_guru = " . $row['id_guru'] . " ")->fetch_assoc();
+
                     ?>
                         <tr>
-                            <td><?= $row["nip"] ?></td>  
-                            <td><?= $row["nama_pegawai"] ?></td>
-                            <td><?= $row["jabatan"] ?></td>
-                            <td><?= $row["pendidikan"] ?></td>  
+                            <td><?= $siswa["nm_siswa"] ?></td>
                             <td>
-                                <a href="<?= $url ?>/app/pegawai_edit.php?nip=<?= $row["nip"] ?>" class="btn btn-warning btn-sm btn-circle">
+                                
+                                <?= $mapel["nm_mapel"] ?>
+                            </td>
+                            <td><?= $guru["nm_guru"] ?></td>
+                            <td><?= $row["hari"] ?></td>
+                            <td><?= $row["waktu_awal"] ?></td>
+                            <td><?= $row["waktu_akhir"] ?></td>
+                            <td>
+                                <a href="<?= $url ?>/app/jadwal_siswa_edit.php?id_jadwal_siswa=<?= $row["id_jadwal_siswa"] ?>" class="btn btn-warning btn-sm btn-circle">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <button onclick="ConfirmDelete(<?= $row['nip'] ?>)" class="btn btn-danger btn-sm btn-circle">
+                                <button onclick="ConfirmDelete(<?= $row['id_jadwal_siswa'] ?>)" class="btn btn-danger btn-sm btn-circle">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>
@@ -71,10 +82,16 @@
             let text = "Apakah Anda Yakin Ingin Menghapus data!\n OK or Cancel.";
             if (confirm(text) == true) {
                 text = "You pressed OK!";
-                window.location.href = "<?= $url ?>/app/aksi/pegawai.php?id_pegawai="+id+"&action=delete";
-            } 
+                window.location.href = "<?= $url ?>/app/aksi/jadwal_siswa.php?id_jadwal_siswa=" + id + "&action=delete";
+            }
         }
     </script>
+
+
+
+
+
 </div>
 <!-- /.container-fluid -->
+
 <?php include_once './template/footer.php'; ?>

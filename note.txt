@@ -120,8 +120,8 @@ CREATE TABLE `jadwal_siswa` (
  `id_mapel` int(11) NOT NULL,
  `id_guru` int(11) NOT NULL,
  `hari` varchar(10) DEFAULT NULL,
- `waktu_awal` timestamps DEFAULT NULL,
- `waktu_akhir` timestamps DEFAULT NULL,
+ `waktu_awal` time DEFAULT NULL,
+ `waktu_akhir` time DEFAULT NULL,
  PRIMARY KEY (`id_jadwal_siswa`)
 );
 
@@ -137,7 +137,6 @@ CREATE TABLE `kehadiran_siswa` (
  `id_siswa` int(11) NOT NULL,
  `tgl_masuk` date DEFAULT NULL,
  `jam_masuk` date DEFAULT NULL,
- `jam_masuk` date DEFAULT NULL,
  `status` enum('Masuk','Tidak Masuk', 'Izin') NOT NULL,
  `keterangan` varchar(100) DEFAULT NULL,
  PRIMARY KEY (`id_kehadiran`)
@@ -152,7 +151,6 @@ CREATE TABLE `nilai_mapel` (
  `ket_nilai` varchar(50) DEFAULT NULL,
  PRIMARY KEY (`id_nilai_mapel`)
 );
-
 
 CREATE TABLE `nilai_ekstra` (
  `id_nilai_ekstra` int(11) NOT NULL AUTO_INCREMENT,

@@ -34,8 +34,8 @@
             <table id="example" class="display" style="width:100%">
                 <thead>
                     <tr>
-                        <th>KODE PELAJARAN</th>
-                        <th>NAMA PELAJARAN</th>
+                        <th>Pelajaran</th>
+                        <th>Periode</th>
                         <th>AKSI</th>
                     </tr>
                 </thead>
@@ -44,8 +44,13 @@
                     foreach (QueryManyData("SELECT * FROM mapel ") as $row) {
                     ?>
                         <tr>
-                            <td><?= $row["kode_pelajaran"] ?></td>
-                            <td><?= $row["nama_pelajaran"] ?></td>
+                            <td><?= $row["nm_mapel"] ?></td>
+                            <td>
+                                <?php
+                                $periode = QueryOnedata("SELECT * FROM periode WHERE id_periode = " . $row['id_periode'] . " ")->fetch_assoc();
+                                ?>
+                                <?= $periode["nm_periode"] ?>
+                            </td>
                             <td>
                                 <a href="<?= $url ?>/app/mapel_edit.php?id_mapel=<?= $row["id_mapel"] ?>" class="btn btn-warning btn-sm btn-circle">
                                     <i class="fas fa-edit"></i>
@@ -67,8 +72,8 @@
             let text = "Apakah Anda Yakin Ingin Menghapus data!\n OK or Cancel.";
             if (confirm(text) == true) {
                 text = "You pressed OK!";
-                window.location.href = "<?= $url ?>/app/aksi/mapel.php?id_mapel="+id+"&action=delete";
-            } 
+                window.location.href = "<?= $url ?>/app/aksi/mapel.php?id_mapel=" + id + "&action=delete";
+            }
         }
     </script>
 </div>

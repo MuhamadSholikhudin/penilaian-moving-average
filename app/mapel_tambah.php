@@ -14,23 +14,32 @@
                 <a href="<?= $url ?>/app/mapel.php" class="btn btn-info btn-sm btn-circle">
                     <i class="fas fa-arrow-left"></i>
                 </a>
-                Tambah Data Pelajaran
+                Tambah Data Mata Pelajaran
             </h6>
         </div>
         <div class="card-body">
-            <form action="<?= $url ?>/app/aksi/mapel.php" method="post" enctype="multipart/form-data">     
+            <form action="<?= $url ?>/app/aksi/mapel.php" method="post" enctype="multipart/form-data">
                 <div class="mb-3 row">
-                    <label for="kode_pelajaran" class="col-sm-2 col-form-label">Kode Pelajaran</label>
+                    <label for="nm_mapel" class="col-sm-2 col-form-label">Mata Pelajaran</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="kode_pelajaran" name="kode_pelajaran" required>
-                    </div>
-                </div>     
-                <div class="mb-3 row">
-                    <label for="nama_pelajaran" class="col-sm-2 col-form-label">Nama Pelajaran</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nama_pelajaran" name="nama_pelajaran" required>
+                        <input type="text" class="form-control" id="nm_mapel" name="nm_mapel" required>
                     </div>
                 </div>
+                <div class="mb-3 row">
+                    <label for="status" class="col-sm-2 col-form-label">Periode</label>
+                    <div class="col-sm-10">                        
+                        <select class="form-control" name="id_periode" id="status">
+                            <?php
+                            foreach (QueryManyData("SELECT * FROM periode ") as $row) {
+                            ?>
+                                <option value="<?= $row['id_periode'] ?>"><?= $row['nm_periode'] ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="mb-3 row">
                     <button type="submit" name="simpanmapel" value="simpanmapel" class="btn btn-primary btn-user btn-block">
                         <i class="fas fa-save"></i> SIMPAN

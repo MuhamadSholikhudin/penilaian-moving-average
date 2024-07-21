@@ -6,7 +6,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Presensi Page</h1>
+    <h1 class="h3 mb-4 text-gray-800">Ekstra Page</h1>
     <?php
     if (isset($_SESSION['message'])) {
     ?>
@@ -23,10 +23,10 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-                <a href="<?= $url ?>/app/presensi_tambah.php" class="btn btn-info btn-sm btn-circle">
+                <a href="<?= $url ?>/app/ekstra_tambah.php" class="btn btn-info btn-sm btn-circle">
                     <i class="fas fa-plus"></i>
                 </a>
-                Data Presensi
+                Data Ekstra
             </h6>
 
         </div>
@@ -34,30 +34,30 @@
             <table id="example" class="display" style="width:100%">
                 <thead>
                     <tr>
-                        <th>NIS</th>
-                        <th>Nama Siswa</th>
-                        <th>Nilai Presensi</th>
-                        <th>Semester</th>
-                        <th>KETERANGAN</th>
+                        <th>Nama Ekstra</th>
+                        <th>Periode</th>
+                        <th>Penanggung Jawab</th>
                         <th>AKSI</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    foreach (QueryManyData("SELECT * FROM presensi LEFT JOIN siswa ON presensi.nis = siswa.nis 
-                    ") as $row) {
+                    foreach (QueryManyData("SELECT * FROM ekstra ") as $row) {
                     ?>
                         <tr>
-                            <td><?= $row["nis"] ?></td>
-                            <td><?= $row["nama_siswa"] ?></td>
-                            <td><?= $row["nilai_presensi"] ?></td>
-                            <td><?= $row["semester"] ?></td>     
-                            <td><?= $row["ket_presensi"] ?></td>
+                            <td><?= $row["nm_ekstra"] ?></td>
                             <td>
-                                <a href="<?= $url ?>/app/presensi_edit.php?id_presensi=<?= $row["id_presensi"] ?>" class="btn btn-warning btn-sm btn-circle">
+                                <?php
+                                $periode = QueryOnedata("SELECT * FROM periode WHERE id_periode = " . $row['id_periode'] . " ")->fetch_assoc();
+                                ?>
+                                <?= $periode["nm_periode"] ?>
+                            </td>
+                            <td><?= $row["penanggung_jawab"] ?></td>
+                            <td>
+                                <a href="<?= $url ?>/app/ekstra_edit.php?id_ekstra=<?= $row["id_ekstra"] ?>" class="btn btn-warning btn-sm btn-circle">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <button onclick="ConfirmDelete(<?= $row['id_presensi'] ?>)" class="btn btn-danger btn-sm btn-circle">
+                                <button onclick="ConfirmDelete(<?= $row['id_ekstra'] ?>)" class="btn btn-danger btn-sm btn-circle">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>
@@ -74,8 +74,8 @@
             let text = "Apakah Anda Yakin Ingin Menghapus data!\n OK or Cancel.";
             if (confirm(text) == true) {
                 text = "You pressed OK!";
-                window.location.href = "<?= $url ?>/app/aksi/presensi.php?id_presensi="+id+"&action=delete";
-            } 
+                window.location.href = "<?= $url ?>/app/aksi/ekstra.php?id_ekstra=" + id + "&action=delete";
+            }
         }
     </script>
 

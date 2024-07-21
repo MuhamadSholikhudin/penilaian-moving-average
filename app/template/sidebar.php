@@ -1,7 +1,7 @@
         <?php 
             // Data sub menu pada menu 
             $access = ["user"];
-            $data_master = [ "siswa", "mapel", "guru","periode", "kelas", "ekstra",];
+            $data_master = [ "siswa", "mapel", "guru","periode", "kelas", "ekstra","jadwal_siswa"];
             $result = [  "jadwal_siswa"];
 
             // Hak Akses memiliku sub menu
