@@ -1,12 +1,12 @@
         <?php 
             // Data sub menu pada menu 
             $access = ["user"];
-            $data_master = [ "siswa", "mapel", "guru","periode", "kelas", "ekstra","jadwal_siswa"];
-            $result = [  "jadwal_siswa"];
+            $data_master = [ "siswa", "mapel", "guru","periode", "kelas", "ekstra", "jadwal_siswa"];
+            $result = ["rapot"];
 
             // Hak Akses memiliku sub menu
             $level = [
-                'wakasiswa' => ["user", "siswa", "mapel", "guru","periode", "kelas","ekstra", "jadwal_siswa"],
+                'wakasiswa' => ["user", "siswa", "mapel", "guru","periode", "kelas","ekstra", "jadwal_siswa", "rapot"],
                 'guru' => ["siswa", "mapel"],
                 
             ];
@@ -24,7 +24,6 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
-
             <!-- Nav Item - Dashboard -->
             <li class="nav-item <?= Sub_menu_active("dashboard") ?>">
                 <a class="nav-link" href="<?= $url ?>/index.php">
@@ -39,7 +38,6 @@
             <div class="sidebar-heading">
                 Interface 
             </div>
-
             <li class="nav-item <?php if(Menu_active($access) == "show") { echo "active"; } ?> ">
                 <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseOne"
                     aria-expanded="true" aria-controls="collapseOne">
