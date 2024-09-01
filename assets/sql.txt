@@ -76,3 +76,33 @@ INSERT INTO ekstra (id_ekstra, id_periode, nm_ekstra, penanggung_jawab) VALUES
 (5, 1, 'Teater', 'Dewi'),
 (6, 1, 'Pramuka', 'Fajar');
 
+CREATE TABLE kehadiran_siswa (
+id_kehadiran int(11) NOT NULL AUTO_INCREMENT,
+id_siswa int(11) NOT NULL,
+tgl_masuk date NOT NULL,
+jam_masuk time NOT NULL,
+jam_pulang time NOT NULL,
+status enum('Masuk', 'Tidak Masuk', 'Izin') DEFAULT NULL,
+keterangan text DEFAULT NULL,
+    PRIMARY KEY(id_kehadiran)
+);
+
+CREATE TABLE nilai_mapel(
+id_nilai_mapel int(11) NOT NULL AUTO_INCREMENT,
+id_siswa int(11) NOT NULL,
+id_jadwal int(11) NOT NULL,
+nilai int(11) NOT NULL,
+ket_nilai text DEFAULT NULL,
+    PRIMARY KEY(id_nilai_mapel)
+);
+
+
+CREATE TABLE nilai_ekstra(
+id_nilai_ekstra int(11) NOT NULL AUTO_INCREMENT,
+id_siswa int(11) NOT NULL,
+id_ekstra_siswa int(11) NOT NULL,
+nilai_ekstra int(11) NOT NULL,
+ket_nilai text DEFAULT NULL,
+    PRIMARY KEY(id_nilai_ekstra)
+);
+

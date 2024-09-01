@@ -1,12 +1,12 @@
         <?php 
             // Data sub menu pada menu 
             $access = ["user"];
-            $data_master = [ "siswa", "mapel", "guru","periode", "kelas", "ekstra", "jadwal_siswa"];
-            $result = ["rapot"];
+            $data_master = [ "siswa", "mapel", "guru","periode", "kelas", "ekstra" ];
+            $result = [ "jadwal_siswa", "ekstra_siswa", "nilai_mapel","nilai_ekstra","nilai_semester","rapot", ];
 
             // Hak Akses memiliku sub menu
             $level = [
-                'wakasiswa' => ["user", "siswa", "mapel", "guru","periode", "kelas","ekstra", "jadwal_siswa", "rapot"],
+                'wakasiswa' => ["user", "siswa", "mapel", "guru","periode", "kelas","ekstra", "jadwal_siswa", "ekstra_siswa", "nilai_mapel", "nilai_ekstra", "nilai_semester","rapot"],
                 'guru' => ["siswa", "mapel"],
                 
             ];
@@ -17,7 +17,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= $url ?>/index.php">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-truck-pickup"></i>
+                    <i class="fas fa-strava"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">SI Penilaian Siswa </div>
             </a>
@@ -61,7 +61,7 @@
             <li class="nav-item <?php if(Menu_active($data_master) == "show") { echo "active"; } ?> ">
                 <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-truck-monster"></i>
+                    <i class="fas fa-fw fa-folder-open"></i>
                     <span>Data Master</span>
                 </a>
                 <div id="collapseTwo" class="collapse <?= Menu_active($data_master) ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
