@@ -2,11 +2,11 @@
             // Data sub menu pada menu 
             $access = ["user"];
             $data_master = [ "siswa", "mapel", "guru","periode", "kelas", "ekstra" ];
-            $result = [ "jadwal_siswa", "ekstra_siswa", "nilai_mapel","nilai_ekstra","nilai_semester","rapot", ];
+            $result = [ "jadwal_siswa", "ekstra_siswa", "nilai_mapel","nilai_ekstra","nilai_semester","moving_average", "rapot", ];
 
             // Hak Akses memiliku sub menu
             $level = [
-                'wakasiswa' => ["user", "siswa", "mapel", "guru","periode", "kelas","ekstra", "jadwal_siswa", "ekstra_siswa", "nilai_mapel", "nilai_ekstra", "nilai_semester","rapot"],
+                'wakasiswa' => ["user", "siswa", "mapel", "guru","periode", "kelas","ekstra", "jadwal_siswa", "ekstra_siswa", "nilai_mapel", "nilai_ekstra", "nilai_semester","moving_average", "rapot"],
                 'guru' => ["siswa", "mapel"],
                 
             ];

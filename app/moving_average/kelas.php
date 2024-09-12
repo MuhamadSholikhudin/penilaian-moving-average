@@ -1,6 +1,6 @@
-<?php include_once './template/header.php'; ?>
-<?php include_once './template/sidebar.php'; ?>
-<?php include_once './template/navbar.php'; ?>
+<?php include_once '../template/header.php'; ?>
+<?php include_once '../template/sidebar.php'; ?>
+<?php include_once '../template/navbar.php'; ?>
 
 <?php 
     $periode = QueryOnedata("SELECT * FROM periode WHERE id_periode = ".$_GET['id_periode']." ")->fetch_assoc();
@@ -56,7 +56,7 @@
                             <td><?= $row["kelas"] ?></td>
                             <td><?= $row["nm_kelas"] ?></td>
                             <td>
-                                <a href="<?= $url ?>/app/nilai_semester_periode_kelas.php?id_periode=<?= $_GET["id_periode"] ?>&id_kelas=<?= $row["id_kelas"] ?>" class="btn btn-info btn-sm ">
+                                <a href="<?= $url ?>/app/moving_average/mapel.php?id_periode=<?= $_GET["id_periode"] ?>&id_kelas=<?= $row["id_kelas"] ?>" class="btn btn-info btn-sm ">
                                     <i class="fas fa-eye"></i> Lihat
                                 </a>
                             </td>
@@ -81,4 +81,4 @@
 </div>
 <!-- /.container-fluid -->
 
-<?php include_once './template/footer.php'; ?>
+<?php include_once '../template/footer.php'; ?>
