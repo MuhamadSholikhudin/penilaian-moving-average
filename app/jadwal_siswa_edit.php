@@ -25,6 +25,26 @@ $jadwal_siswa = QueryOnedata("SELECT * FROM jadwal_siswa WHERE id_jadwal_siswa =
             <form action="<?= $url ?>/app/aksi/jadwal_siswa.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" class="form-control" id="inputusername" name="id_jadwal_siswa" value="<?= $jadwal_siswa['id_jadwal_siswa'] ?>" required>
                 <div class="mb-3 row">
+                    <label for="id_siswa" class="col-sm-2 col-form-label">Kelas</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" name="id_kelas" id="id_kelas">
+                            <?php
+                            foreach (QueryManyData("SELECT * FROM kelas ") as $row) {
+                                if ($row["id_kelas"] == $jadwal_kelas['id_kelas']) {
+                            ?>
+                                    <option value="<?= $row["id_kelas"] ?>" selected> <?= $row["kelas"] ?> <?= $row["nm_kelas"] ?> </option>
+                                <?php
+                                } else {
+                                ?>
+                                    <option value="<?= $row["id_kelas"] ?>"> <?= $row["kelas"] ?> <?= $row["nm_kelas"] ?> </option>
+                            <?php
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 row">
                     <label for="id_siswa" class="col-sm-2 col-form-label">Siswa</label>
                     <div class="col-sm-10">
                         <select class="form-control" name="id_siswa" id="id_siswa">
@@ -44,6 +64,7 @@ $jadwal_siswa = QueryOnedata("SELECT * FROM jadwal_siswa WHERE id_jadwal_siswa =
                         </select>
                     </div>
                 </div>
+
                 <div class="mb-3 row">
                     <label for="id_mapel" class="col-sm-2 col-form-label">Mapel</label>
                     <div class="col-sm-10">

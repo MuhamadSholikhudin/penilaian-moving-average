@@ -18,7 +18,27 @@
             </h6>
         </div>
         <div class="card-body">
-            <form action="<?= $url ?>/app/aksi/jadwal_siswa.php" method="post" enctype="multipart/form-data">          
+            <form action="<?= $url ?>/app/aksi/jadwal_siswa.php" method="post" enctype="multipart/form-data">      
+                <div class="mb-3 row">
+                    <label for="id_siswa" class="col-sm-2 col-form-label">Kelas</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" name="id_kelas" id="id_kelas">
+                            <?php
+                            foreach (QueryManyData("SELECT * FROM kelas ") as $row) {
+                                if ($row["id_kelas"] == $jadwal_kelas['id_kelas']) {
+                            ?>
+                                    <option value="<?= $row["id_kelas"] ?>" selected> <?= $row["kelas"] ?> <?= $row["nm_kelas"] ?> </option>
+                                <?php
+                                } else {
+                                ?>
+                                    <option value="<?= $row["id_kelas"] ?>"> <?= $row["kelas"] ?> <?= $row["nm_kelas"] ?> </option>
+                            <?php
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>    
                 <div class="mb-3 row">
                     <label for="id_siswa" class="col-sm-2 col-form-label">Siswa</label>
                     <div class="col-sm-10">
