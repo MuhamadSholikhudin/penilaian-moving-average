@@ -41,7 +41,7 @@
             <li class="nav-item <?php if(Menu_active($access) == "show") { echo "active"; } ?> ">
                 <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseOne"
                     aria-expanded="true" aria-controls="collapseOne">
-                    <i class="fas fa-fw fa-database"></i>
+                    <i class="fas fa-fw fa-user-lock"></i>
                     <span>Akses</span>
                 </a>
                 <div id="collapseOne" class="collapse <?= Menu_active($access) ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -51,7 +51,7 @@
                             $check_role = array_search($access[$sub], $level[$_SESSION['level']]); 
                             if ($check_role !== false) {                                          
                             ?>
-                            <a class="collapse-item <?= Sub_menu_active($access[$sub]) ?>" href="<?= $url ?>/app/<?= $access[$sub] ?>.php"><?= str_replace("_"," ", $access[$sub]); ?></a>
+                            <a class="collapse-item <?= Sub_menu_active($access[$sub]) ?>" href="<?= $url ?>/app/<?= $access[$sub] ?>/<?= $access[$sub] ?>.php"><?= ucfirst(str_replace("_"," ", $access[$sub])); ?></a>
                         <?php  }
                         }   ?>
                     </div>
@@ -71,7 +71,7 @@
                             $check_role = array_search($data_master[$sub], $level[$_SESSION['level']]); 
                             if ($check_role !== false) {                                          
                             ?>
-                            <a class="collapse-item <?= Sub_menu_active($data_master[$sub]) ?>" href="<?= $url ?>/app/<?= $data_master[$sub] ?>.php"><?= str_replace("_"," ", $data_master[$sub]); ?></a>
+                            <a class="collapse-item <?= Sub_menu_active($data_master[$sub]) ?>" href="<?= $url ?>/app/<?= $data_master[$sub] ?>/<?= $data_master[$sub] ?>.php"><?= ucfirst(str_replace("_"," ", $data_master[$sub])); ?></a>
                         <?php  }
                         }   ?>
                     </div>
@@ -91,7 +91,7 @@
                             $check_role = array_search($result[$sub], $level[$_SESSION['level']]); 
                             if ($check_role !== false) {                                          
                             ?>
-                            <a class="collapse-item <?= Sub_menu_active($result[$sub]) ?>" href="<?= $url ?>/app/<?= $result[$sub] ?>.php"><?= str_replace("_"," ", $result[$sub]); ?></a>
+                            <a class="collapse-item <?= Sub_menu_active($result[$sub]) ?>" href="<?= $url ?>/app/<?= $result[$sub] ?>/<?= $result[$sub] ?>.php"><?= ucfirst(str_replace("_"," ", $result[$sub])) ; ?></a>
                         <?php  }
                         }   ?>
                     </div>

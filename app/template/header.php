@@ -1,14 +1,15 @@
 <?php 
-        $string = str_replace("/penilaian-moving-average/app/", "", $_SERVER['REQUEST_URI']);
-        $expl = explode("/", $string);
-        if($expl[0] == "moving_average"){
-            include '../../config.php';
-        }else{
-            include '../config.php';
-        }
+        // $string = str_replace("/penilaian-moving-average/app/", "", $_SERVER['REQUEST_URI']);
+        // $expl = explode("/", $string);
+        // if($expl[0] == "moving_average"){
+        //     include '../../config.php';
+        // }else{
+        //     include '../config.php';
+        // }
+        include '../../config/config.php';
 session_start();
 if(!isset($_SESSION['login'])){
-    header("Location: ".$url."/app/login.php");
+    header("Location: ".$url."/app/auth/login.php");
     exit(); 
 }
 ?>
