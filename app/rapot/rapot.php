@@ -2,17 +2,11 @@
 <?php include_once '../template/sidebar.php'; ?>
 <?php include_once '../template/navbar.php'; ?>
 
-<?php 
-    $periode = QueryOnedata("SELECT * FROM periode WHERE id_periode = ".$_GET['id_periode']." ")->fetch_assoc();
-    $kelas = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = ".$_GET['id_kelas']." ")->fetch_assoc();
-
-?>
-
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Data Nilai kelas periode <?= $periode['nm_periode'] ?></h1>
+    <h1 class="h3 mb-4 text-gray-800">Moving Average Page</h1>
     <?php
     if (isset($_SESSION['message'])) {
     ?>
@@ -29,37 +23,30 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">                
-                Data Kelas  semester
+            <h6 class="m-0 font-weight-bold text-primary">
+                Data Kelas semester
             </h6>
         </div>
         <div class="card-body">
             <table id="example" class="display" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Kelas</th>
-                        <th>Nama Pelajaran</th>
-                        <th>Moving Average</th>
+                        <th>Periode</th>
+                        <th>Status</th>
+                        <th>Lihat</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    // Menampilkan data kelas dengan periode id_periode = $_GET['id_periode']
-                    $get_mapel = "SELECT mapel.id_mapel, mapel.nm_mapel FROM mapel 
-                        LEFT JOIN jadwal_siswa ON mapel.id_mapel = jadwal_siswa.id_mapel
-                        LEFT JOIN periode ON mapel.id_periode = periode.id_periode
-                        LEFT JOIN kelas ON kelas.id_kelas = jadwal_siswa.id_kelas
-                        WHERE periode.id_periode = ".$_GET["id_periode"]." 
-                        AND kelas.id_kelas = ".$_GET["id_kelas"]."
-                        GROUP BY mapel.id_mapel                        
-                        ";
-                    foreach (QueryManyData($get_mapel) as $row) {
+                    foreach (QueryManyData("SELECT * FROM periode ORDER BY id_periode DESC") as $row) {
                     ?>
                         <tr>
-                            <td><?= $kelas["kelas"] ?></td>
-                            <td><?= $row["nm_mapel"] ?></td>
                             <td>
-                                <a href="<?= $url ?>/app/moving_average/average.php?id_periode=<?= $_GET["id_periode"] ?>&id_kelas=<?= $_GET["id_kelas"] ?>&id_mapel=<?= $row["id_mapel"] ?>" class="btn btn-info btn-sm ">
+                                <?= $row["nm_periode"] ?>
+                            </td>
+                            <td><?= $row["status_periode"] ?></td>
+                            <td>
+                                <a href="<?= $url ?>/app/rapot/rapot_periode.php?id_periode=<?= $row["id_periode"] ?>" class="btn btn-info btn-sm ">
                                     <i class="fas fa-eye"></i> Lihat
                                 </a>
                             </td>
@@ -68,7 +55,6 @@
                     }
                     ?>
                 </tbody>
-
             </table>
         </div>
     </div>

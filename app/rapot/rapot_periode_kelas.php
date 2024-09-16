@@ -2,10 +2,9 @@
 <?php include_once '../template/sidebar.php'; ?>
 <?php include_once '../template/navbar.php'; ?>
 
-<?php 
-    $periode = QueryOnedata("SELECT * FROM periode WHERE id_periode = ".$_GET['id_periode']." ")->fetch_assoc();
-    $kelas = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = ".$_GET['id_kelas']." ")->fetch_assoc();
-
+<?php
+$periode = QueryOnedata("SELECT * FROM periode WHERE id_periode = " . $_GET['id_periode'] . " ")->fetch_assoc();
+$kelas = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = " . $_GET['id_kelas'] . " ")->fetch_assoc();
 ?>
 
 <!-- Begin Page Content -->
@@ -29,8 +28,8 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">                
-                Data Kelas  semester
+            <h6 class="m-0 font-weight-bold text-primary">
+                Data Kelas semester
             </h6>
         </div>
         <div class="card-body">
@@ -38,28 +37,27 @@
                 <thead>
                     <tr>
                         <th>Kelas</th>
-                        <th>Nama Pelajaran</th>
-                        <th>Moving Average</th>
+                        <th>Nama Siswa</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     // Menampilkan data kelas dengan periode id_periode = $_GET['id_periode']
-                    $get_mapel = "SELECT mapel.id_mapel, mapel.nm_mapel FROM mapel 
-                        LEFT JOIN jadwal_siswa ON mapel.id_mapel = jadwal_siswa.id_mapel
-                        LEFT JOIN periode ON mapel.id_periode = periode.id_periode
-                        LEFT JOIN kelas ON kelas.id_kelas = jadwal_siswa.id_kelas
-                        WHERE periode.id_periode = ".$_GET["id_periode"]." 
-                        AND kelas.id_kelas = ".$_GET["id_kelas"]."
-                        GROUP BY mapel.id_mapel                        
+                    $get_siswa = "SELECT siswa.id_siswa, siswa.nm_siswa FROM siswa 
+                        LEFT JOIN jadwal_siswa ON siswa.id_siswa = jadwal_siswa.id_siswa                       
+                        LEFT JOIN mapel ON mapel.id_mapel = jadwal_siswa.id_mapel
+                        WHERE mapel.id_periode = " . $_GET["id_periode"] . " 
+                        AND jadwal_siswa.id_kelas = " . $_GET["id_kelas"] . "
+                        GROUP BY siswa.id_siswa                        
                         ";
-                    foreach (QueryManyData($get_mapel) as $row) {
+                    foreach (QueryManyData($get_siswa) as $row) {
                     ?>
                         <tr>
-                            <td><?= $kelas["kelas"] ?></td>
-                            <td><?= $row["nm_mapel"] ?></td>
+                            <td><?= $kelas["kelas"] ?> <?= $kelas["nm_kelas"] ?></td>
+                            <td><?= $row["nm_siswa"] ?></td>
                             <td>
-                                <a href="<?= $url ?>/app/moving_average/average.php?id_periode=<?= $_GET["id_periode"] ?>&id_kelas=<?= $_GET["id_kelas"] ?>&id_mapel=<?= $row["id_mapel"] ?>" class="btn btn-info btn-sm ">
+                                <a href="<?= $url ?>/app/rapot/rapot_lihat.php?id_periode=<?= $_GET["id_periode"] ?>&id_kelas=<?= $_GET["id_kelas"] ?>&id_siswa=<?= $row['id_siswa'] ?>" class="btn btn-info btn-sm ">
                                     <i class="fas fa-eye"></i> Lihat
                                 </a>
                             </td>
@@ -68,7 +66,6 @@
                     }
                     ?>
                 </tbody>
-
             </table>
         </div>
     </div>
