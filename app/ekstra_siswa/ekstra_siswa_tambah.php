@@ -14,7 +14,7 @@
                 <a href="<?= $url ?>/app/ekstra_siswa/ekstra_siswa.php" class="btn btn-info btn-sm btn-circle">
                     <i class="fas fa-arrow-left"></i>
                 </a>
-                Edit Data Ekstra Siswa
+                Tambah Data Ekstra Siswa
             </h6>
         </div>
         <div class="card-body">
@@ -49,8 +49,8 @@
                     </div>
                 </div>               
                 <div class="mb-3 row">
-                    <button type="submit" name="simpanekstra_siswa" value="simpanekstra_siswa" class="btn btn-success btn-user btn-block">
-                        <i class="fas fa-edit"></i> UPDATE
+                    <button type="submit" name="simpanekstra_siswa" value="simpanekstra_siswa" class="btn btn-primary btn-user btn-block">
+                        <i class="fas fa-save"></i> SIMPAN
                     </button>
                 </div>
             </form>

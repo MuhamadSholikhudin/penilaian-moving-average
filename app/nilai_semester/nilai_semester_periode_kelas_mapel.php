@@ -14,7 +14,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Data Nilai kelas periode <?= $periode['nm_periode'] ?></h1>
+    <h1 class="h3 mb-4 text-gray-800">Data Nilai kelas <?= $kelas['kelas']." ". $kelas['nm_kelas'] ?>  periode <?= $periode['nm_periode'] ?></h1>
     <?php
     if (isset($_SESSION['message'])) {
     ?>
@@ -32,7 +32,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">                
-                Data Kelas  semester
+            Data Nilai Mata pelajaran <?= $mapel['nm_mapel'] ?> kelas <?= $kelas['kelas']." ". $kelas['nm_kelas'] ?>  periode <?= $periode['nm_periode'] ?>
             </h6>
         </div>
         <div class="card-body">
@@ -235,7 +235,7 @@
                             <?php
                                 if ($nilai_uh1r->num_rows > 0) {                                    
                                     $row1 = $nilai_uh1r->fetch_assoc();
-                                    echo $row1['nilai'];                                        
+                                    echo round($row1['nilai'], 1);                                        
                                     $float = (float)$row1['nilai'];
                                     $total = $total + $float;    
                                     array_push($total_arr, $float);                                   
@@ -246,7 +246,7 @@
                             <?php
                                 if ($nilai_uh2r->num_rows > 0) {
                                     $row2 = $nilai_uh2r->fetch_assoc();
-                                    echo $row2['nilai'];                                        
+                                    echo  round($row2['nilai'], 1);                                        
                                     $float = (float)$row2['nilai'];
                                     $total = $total + $float;   
                                     array_push($total_arr, $float);                                   
@@ -257,7 +257,7 @@
                             <?php
                                 if ($nilai_uh3r->num_rows > 0) {
                                     $row3 = $nilai_uh3r->fetch_assoc();
-                                    echo $row3['nilai'];                                        
+                                    echo  round($row3['nilai'], 1);                                        
                                     $float = (float)$row3['nilai'];
                                     $total = $total + $float; 
                                     array_push($total_arr, $float);                                   
@@ -268,7 +268,7 @@
                             <?php
                                 if ($nilai_uh4r->num_rows > 0) {
                                     $row4 = $nilai_uh4r->fetch_assoc();
-                                    echo $row4['nilai'];                                        
+                                    echo round($row4['nilai'], 1);                                        
                                     $float = (float)$row4['nilai'];
                                     $total = $total + $float; 
                                     array_push($total_arr, $float);                                   
@@ -279,7 +279,7 @@
                             <?php
                                 if ($nilai_utsr->num_rows > 0) {
                                     $row5 = $nilai_utsr->fetch_assoc();
-                                    echo $row5['nilai'];                                        
+                                    echo  round($row5['nilai'], 1);                                        
                                     $float = (float)$row5['nilai'];
                                     $total = $total + $float;
                                     array_push($total_arr, $float);                                   
@@ -290,7 +290,7 @@
                                 <?php
                                 if ($nilai_uasr->num_rows > 0) {
                                     $row6 = $nilai_uasr->fetch_assoc();
-                                    echo $row6['nilai'];                                        
+                                    echo round($row6['nilai'], 1);                                        
                                     $float = (float)$row6['nilai'];
                                     $total = $total + $float;
                                     array_push($total_arr, $float);                                   
@@ -303,7 +303,7 @@
                             
                             <td>
                                 <?php 
-                                    echo ($total /count($total_arr));
+                                    echo round(($total /count($total_arr)), 1);
                                 ?>
                             </td>
                             <td>

@@ -5,14 +5,13 @@
 <?php 
     $periode = QueryOnedata("SELECT * FROM periode WHERE id_periode = ".$_GET['id_periode']." ")->fetch_assoc();
     $kelas = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = ".$_GET['id_kelas']." ")->fetch_assoc();
-
 ?>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Data Nilai kelas periode <?= $periode['nm_periode'] ?></h1>
+    <h1 class="h3 mb-4 text-gray-800">Data Moving Average <?= $periode['nm_periode'] ?></h1>
     <?php
     if (isset($_SESSION['message'])) {
     ?>
@@ -30,7 +29,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">                
-                Data Kelas  semester
+                Data Moving Average <?= $periode['nm_periode'] ?> kelas <?= $kelas['kelas']." ". $kelas['nm_kelas'] ?>
             </h6>
         </div>
         <div class="card-body">

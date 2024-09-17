@@ -33,12 +33,12 @@
                 <div class="mb-3 row">
                     <label for="status" class="col-sm-2 col-form-label ">Ekstra Siswa</label>
                     <div class="col-sm-10">                        
-                        <select class="form-control js-example-basic-single" name="ekstra_siswa" id="status">
+                        <select class="form-control js-example-basic-single" name="id_ekstra_siswa" id="status">
                             <?php
                             foreach (QueryManyData("SELECT * FROM ekstra_siswa LEFT JOIN ekstra ON ekstra_siswa.id_ekstra = ekstra.id_ekstra LEFT JOIN periode ON periode.id_periode = ekstra_siswa.id_periode ORDER BY ekstra.id_periode DESC ") as $row) {
-                                $kel = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = ". $row['id_kelas'] ."")->fetch_assoc();
+                                // $kel = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = ". $row['id_kelas'] ."")->fetch_assoc();
                             ?>
-                                <option value="<?= $row['id_ekstra_siswa'] ?>"><?= $row['nm_ekstra'] ?> Kelas <?= $kel['kelas'] ?></option>
+                                <option value="<?= $row['id_ekstra_siswa'] ?>"><?= $row['nm_ekstra'] ?> Kelas <?= $row['nm_ekstra'] ?></option>
                             <?php
                             }
                             ?>

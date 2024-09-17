@@ -2,9 +2,9 @@
 <?php include_once '../template/sidebar.php'; ?>
 <?php include_once '../template/navbar.php'; ?>
 
-<?php 
-    $periode = QueryOnedata("SELECT * FROM periode WHERE id_periode = ".$_GET['id_periode']." ")->fetch_assoc();
-    $kelas = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = ".$_GET['id_kelas']." ")->fetch_assoc();
+<?php
+$periode = QueryOnedata("SELECT * FROM periode WHERE id_periode = " . $_GET['id_periode'] . " ")->fetch_assoc();
+$kelas = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = " . $_GET['id_kelas'] . " ")->fetch_assoc();
 
 ?>
 
@@ -12,7 +12,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Data Nilai kelas periode <?= $periode['nm_periode'] ?></h1>
+    <h1 class="h3 mb-4 text-gray-800">Data Nilai kelas <?= $kelas['kelas']." ". $kelas['nm_kelas'] ?>  periode <?= $periode['nm_periode'] ?></h1>
     <?php
     if (isset($_SESSION['message'])) {
     ?>
@@ -29,8 +29,8 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">                
-                Data Kelas  semester
+            <h6 class="m-0 font-weight-bold text-primary">
+                Data Nilai kelas <?= $kelas['kelas']." ". $kelas['nm_kelas'] ?>  periode <?= $periode['nm_periode'] ?>
             </h6>
         </div>
         <div class="card-body">
@@ -49,8 +49,8 @@
                         LEFT JOIN jadwal_siswa ON mapel.id_mapel = jadwal_siswa.id_mapel
                         LEFT JOIN periode ON mapel.id_periode = periode.id_periode
                         LEFT JOIN kelas ON kelas.id_kelas = jadwal_siswa.id_kelas
-                        WHERE periode.id_periode = ".$_GET["id_periode"]." 
-                        AND kelas.id_kelas = ".$_GET["id_kelas"]."
+                        WHERE periode.id_periode = " . $_GET["id_periode"] . " 
+                        AND kelas.id_kelas = " . $_GET["id_kelas"] . "
                         GROUP BY mapel.id_mapel                        
                         ";
                     foreach (QueryManyData($get_mapel) as $row) {

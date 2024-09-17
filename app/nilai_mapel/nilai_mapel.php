@@ -24,9 +24,18 @@
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
                 <a href="<?= $url ?>/app/nilai_mapel/nilai_mapel_tambah.php" class="btn btn-info btn-sm btn-circle">
-                    <i class="fas fa-plus"></i>
+                    <i class="fas fa-plus" data-toggle="tooltip" data-placement="top" title="Tambah Data nilai mapel" ></i>
                 </a>
-                Data Nilai Siswa
+                &nbsp; 
+                &nbsp;                 
+                <button class="btn btn-secondary btn-sm btn-circle">
+                    <i class="fas fa-upload"></i>
+                </button>
+                &nbsp; 
+                &nbsp; 
+                &nbsp; 
+                &nbsp; 
+                Data Nilai 
             </h6>
 
         </div>
