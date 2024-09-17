@@ -6,7 +6,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Jadwal Ekstra Page</h1>
+    <h1 class="h3 mb-4 text-gray-800">Nilai Siswa Page</h1>
     <?php
     if (isset($_SESSION['message'])) {
     ?>
@@ -23,10 +23,10 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-                <a href="<?= $url ?>/app/jadwal_siswa_tambah.php" class="btn btn-info btn-sm btn-circle">
+                <a href="<?= $url ?>/app/nilai_mapel/nilai_mapel_tambah.php" class="btn btn-info btn-sm btn-circle">
                     <i class="fas fa-plus"></i>
                 </a>
-                Data Jadwal Ekstra
+                Data Nilai Siswa
             </h6>
 
         </div>
@@ -34,29 +34,31 @@
             <table id="example" class="display" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Nama Siswa</th>
-                        <th>Nama Ekstra</th>
-                        <th>Penanggung Jawab</th>
+                        <th>Siswa</th>
+                        <th>Mapel</th>
+                        <th>Nilai</th>
+                        <th>Ket Nilai</th>
                         <th>AKSI</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    foreach (QueryManyData("SELECT * FROM ekstra_siswa ") as $row) {
+                    foreach (QueryManyData("SELECT * FROM nilai_mapel ") as $row) {
                         $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $row['id_siswa'] . " ")->fetch_assoc();
-                        $ekstra = QueryOnedata("SELECT * FROM ekstra WHERE id_ekstra = " . $row['id_ekstra'] . " ")->fetch_assoc();
+                        $mapel = QueryOnedata("SELECT mapel.nm_mapel FROM mapel LEFT JOIN jadwal_siswa ON mapel.id_mapel = jadwal_siswa.id_mapel WHERE jadwal_siswa.id_jadwal_siswa = " . $row['id_jadwal'] . " ")->fetch_assoc();
                     ?>
                         <tr>
                             <td><?= $siswa["nm_siswa"] ?></td>
-                            <td>                                
-                                <?= $ekstra["nm_ekstra"] ?>
-                            </td>
-                            <td><?= $ekstra["penanggung_jawab"] ?></td>
                             <td>
-                                <a href="<?= $url ?>/app/ekstra_siswa_edit.php?id_ekstra_siswa=<?= $row["id_ekstra_siswa"] ?>" class="btn btn-warning btn-sm btn-circle">
+                                <?= $mapel["nm_mapel"] ?>
+                            </td>
+                            <td><?= $row["nilai"] ?></td>
+                            <td><?= $row["ket_nilai"] ?></td>
+                            <td>
+                                <a href="<?= $url ?>/app/nilai_mapel_edit.php?id_nilai_mapel=<?= $row["id_nilai_mapel"] ?>" class="btn btn-warning btn-sm btn-circle">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <button onclick="ConfirmDelete(<?= $row['id_ekstra_siswa'] ?>)" class="btn btn-danger btn-sm btn-circle">
+                                <button onclick="ConfirmDelete(<?= $row['id_nilai_mapel'] ?>)" class="btn btn-danger btn-sm btn-circle">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>
@@ -77,11 +79,6 @@
             }
         }
     </script>
-
-
-
-
-
 </div>
 <!-- /.container-fluid -->
 

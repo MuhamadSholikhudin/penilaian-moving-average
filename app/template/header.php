@@ -1,12 +1,5 @@
 <?php 
-        // $string = str_replace("/penilaian-moving-average/app/", "", $_SERVER['REQUEST_URI']);
-        // $expl = explode("/", $string);
-        // if($expl[0] == "moving_average"){
-        //     include '../../config.php';
-        // }else{
-        //     include '../config.php';
-        // }
-        include '../../config/config.php';
+include '../../config/config.php';
 session_start();
 if(!isset($_SESSION['login'])){
     header("Location: ".$url."/app/auth/login.php");
@@ -36,6 +29,8 @@ if(!isset($_SESSION['login'])){
     <!-- Custom styles for this template-->
     <link href="<?= $url ?>/assets/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="<?= $url ?>/assets/css/dataTables.dataTables.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 </head>
 <body id="page-top">

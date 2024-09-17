@@ -6,7 +6,7 @@
 
             // Hak Akses memiliku sub menu
             $level = [
-                'wakasiswa' => ["user", "siswa", "mapel", "guru","periode", "kelas","ekstra", "jadwal_siswa", "ekstra_siswa", "nilai_mapel", "nilai_ekstra", "nilai_semester","moving_average", "rapot"],
+                'wakasiswa' => ["user", "siswa", "mapel", "guru","periode", "kelas", "ekstra", "jadwal_siswa", "ekstra_siswa", "nilai_mapel", "nilai_ekstra", "nilai_semester","moving_average", "rapot"],
                 'guru' => ["siswa", "mapel"],
                 
             ];

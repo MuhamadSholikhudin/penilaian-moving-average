@@ -1,6 +1,6 @@
-<?php include_once './template/header.php'; ?>
-<?php include_once './template/sidebar.php'; ?>
-<?php include_once './template/navbar.php'; ?>
+<?php include_once '../template/header.php'; ?>
+<?php include_once '../template/sidebar.php'; ?>
+<?php include_once '../template/navbar.php'; ?>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -23,10 +23,10 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-                <a href="<?= $url ?>/app/nilai_mapel_tambah.php" class="btn btn-info btn-sm btn-circle">
+                <a href="<?= $url ?>/app/nilai_ekstra/nilai_ekstra_tambah.php" class="btn btn-info btn-sm btn-circle">
                     <i class="fas fa-plus"></i>
                 </a>
-                Data Nilai Siswa
+                Data Nilai Ekstra Siswa
             </h6>
 
         </div>
@@ -35,33 +35,30 @@
                 <thead>
                     <tr>
                         <th>Siswa</th>
-                        <th>Mapel</th>
+                        <th>Ektrakulikuler</th>
                         <th>Nilai</th>
-                        <th>Ket Nilai</th>
+                        <th></th>
                         <th>AKSI</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    foreach (QueryManyData("SELECT * FROM nilai_mapel ") as $row) {
+                    foreach (QueryManyData("SELECT * FROM nilai_ekstra ") as $row) {
                         $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $row['id_siswa'] . " ")->fetch_assoc();
-                        $mapel = QueryOnedata("SELECT mapel.nm_mapel FROM mapel LEFT JOIN jadwal_siswa ON mapel.id_mapel = jadwal_siswa.id_mapel WHERE jadwal_siswa.id_jadwal_siswa = " . $row['id_jadwal'] . " ")->fetch_assoc();
-                        // $guru = QueryOnedata("SELECT * FROM guru WHERE id_guru = " . $row['id_guru'] . " ")->fetch_assoc();
-
+                        $ekstra = QueryOnedata("SELECT ekstra.nm_ekstra FROM ekstra LEFT JOIN ekstra_siswa ON ekstra.id_ekstra = ekstra_siswa.id_ekstra WHERE ekstra_siswa.id_ekstra_siswa = " . $row['id_ekstra_siswa'] . " ")->fetch_assoc();
                     ?>
                         <tr>
                             <td><?= $siswa["nm_siswa"] ?></td>
                             <td>
-                                
-                                <?= $mapel["nm_mapel"] ?>
+                                <?= $ekstra["nm_ekstra"] ?>
                             </td>
                             <td><?= $row["nilai"] ?></td>
                             <td><?= $row["ket_nilai"] ?></td>
                             <td>
-                                <a href="<?= $url ?>/app/nilai_mapel_edit.php?id_nilai_mapel=<?= $row["id_nilai_mapel"] ?>" class="btn btn-warning btn-sm btn-circle">
+                                <a href="<?= $url ?>/app/nilai_ekstra/nilai_ekstra_edit.php?id_nilai_ekstra=<?= $row["id_nilai_ekstra"] ?>" class="btn btn-warning btn-sm btn-circle">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <button onclick="ConfirmDelete(<?= $row['id_nilai_mapel'] ?>)" class="btn btn-danger btn-sm btn-circle">
+                                <button onclick="ConfirmDelete(<?= $row['id_nilai_ekstra'] ?>)" class="btn btn-danger btn-sm btn-circle">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>
@@ -82,12 +79,7 @@
             }
         }
     </script>
-
-
-
-
-
 </div>
 <!-- /.container-fluid -->
 
-<?php include_once './template/footer.php'; ?>
+<?php include_once '../template/footer.php'; ?>
