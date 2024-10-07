@@ -28,7 +28,7 @@
                 </a>
                 &nbsp; 
                 &nbsp;                 
-                <button class="btn btn-secondary btn-sm btn-circle">
+                <button class="btn btn-secondary btn-sm btn-circle" data-toggle="modal" data-target="#exampleModal">
                     <i class="fas fa-upload"></i>
                 </button>
                 &nbsp; 
@@ -37,6 +37,30 @@
                 &nbsp; 
                 Data Nilai 
             </h6>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Upload Data Nilai</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" enctype="multipart/form-data" action="<?= $url ?>/aksi/upload_nilai_mapel.php">
+                <div class="modal-body">
+                    Pilih File: 
+                    <input name="fileExcel" type="file" required="required"> 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input name="upload" type="submit" value="Import" class="btn btn-primary">
+                    <!-- <button type="submit" class="btn btn-primary">Upload</button> -->
+                </div>
+                </form>
+                </div>
+            </div>
+            </div>
 
         </div>
         <div class="card-body">
