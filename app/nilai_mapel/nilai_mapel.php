@@ -49,6 +49,8 @@
                 </div>
                 <form method="post" enctype="multipart/form-data" action="<?= $url ?>/aksi/upload_nilai_mapel.php">
                 <div class="modal-body">
+                    <a href="<?= $url ?>/assets/form_upload_nilai_mapel.xlsx">FORMAT UPLOAD</a>           
+                    <br>         
                     Pilih File: 
                     <input name="fileExcel" type="file" required="required"> 
                 </div>

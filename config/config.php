@@ -3,11 +3,12 @@ function Url_web(){
     return "/penilaian-moving-average";
 }
 $defaul_uri = Url_web();
-$url = "http://".$_SERVER['SERVER_NAME'].":8080".$defaul_uri;
+$url = "http://".$_SERVER['SERVER_NAME']."".$defaul_uri;
 $lokasi_foto = 'C:/xampp/htdocs/'.Url_web().'/foto';
+$path_sistem = 'C:/xampp/htdocs/'.Url_web().'';
 $YMDhis = date('YMDhis');
 function DB(){
-    return ["localhost", "root", "password_baru", "penilaian_ma"];
+    return ["localhost", "root", "", "penilaian_ma"];
 }
 function runQuery($sql) {
     try {

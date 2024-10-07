@@ -1,21 +1,8 @@
 <?php
-// Include library SimpleXLSX
 include '../config/config.php';
-require_once '../SimpleXLSX/src/SimpleXLSX.php';
- 
-/*
-// Koneksi ke database MySQL
-$host = 'localhost';
-$dbname = 'nama_database';
-$username = 'root';
-$password = '';
-$mysqli = new mysqli($host, $username, $password, $dbname);
-
-// Cek koneksi
-if ($mysqli->connect_error) {
-    die("Koneksi gagal: " . $mysqli->connect_error);
-}
-*/
+use Shuchkin\SimpleXLSX;
+// Include library SimpleXLSX
+require_once '../simplexlsx/src/SimpleXLSX.php';
 
 if (isset($_FILES['fileExcel'])) {
     // Cek apakah file di-upload
@@ -28,17 +15,21 @@ if (isset($_FILES['fileExcel'])) {
             // Ambil baris data dari file Excel
             $rows = $xlsx->rows();
             // Looping untuk setiap baris data Excel
+            $no_rows = 1;
             foreach ($rows as $row) {
+                if($no_rows != 1){
                 $data = [
                     "id_siswa" => $row[0],
                     "id_jadwal" => $row[1],
                     "nilai" => $row[2],
                     "ket_nilai" => $row[3],
                 ];    
-                echo "<br>";
-                var_dump($data);
                 // Insert satu data
-                //$process = InsertOnedata("nilai_mapel", $data);
+                $process = InsertOnedata("nilai_mapel", $data);
+                // echo "<br>";
+                // var_dump($data);
+                }
+
                 // Asumsi kolom Excel [0 => 'id', 1 => 'name', 2 => 'email']
                 /*
 
@@ -54,12 +45,13 @@ if (isset($_FILES['fileExcel'])) {
                     echo "Error: " . $sql . "<br>" . $mysqli->error;
                 }
                 */
+                $no_rows++;
             }
         } else {
-            echo SimpleXLSX::parseError();
+            $_SESSION['message'] = SimpleXLSX::parseError();
         }
     } else {
-        echo "File tidak berhasil di-upload.";
+        $_SESSION['message'] = "File tidak berhasil di-upload.";
     }
 }
 

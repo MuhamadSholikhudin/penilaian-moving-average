@@ -1,36 +1,42 @@
-<?php include_once '../template/header.php'; ?>
-<?php include_once '../template/sidebar.php'; ?>
-<?php include_once '../template/navbar.php'; ?>
 <?php
+include '../../config/config.php';
 $periode = QueryOnedata("SELECT * FROM periode WHERE id_periode = " . $_GET['id_periode'] . " ")->fetch_assoc();
 $kelas = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = " . $_GET['id_kelas'] . " ")->fetch_assoc();
 $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $_GET['id_siswa'] . " ")->fetch_assoc();
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SI Penilaian MA</title>
+    <!-- Custom fonts for this template-->
 
+    <link rel="apple-touch-icon" sizes="180x180" href="<?= $url ?>/assets/img/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= $url ?>/assets/img/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= $url ?>/assets/img/icons/favicon-16x16.png">
+
+
+    <link href="<?= $url ?>/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"> -->
+    <link href="<?= $url ?>/assets/css/font.css" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="<?= $url ?>/assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?= $url ?>/assets/css/dataTables.dataTables.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+</head>
+<body>
+    
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Rapot Page</h1>
-    <?php
-    if (isset($_SESSION['message'])) {
-    ?>
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Success !</strong> <?= $_SESSION['message'] ?>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    <?php
-        unset($_SESSION['message']);
-    }
-    ?>
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                Rapot Siswa
-            </h6>
-            <a href="<?= $url.'/app/rapot/rapot_cetak.php?id_periode='.$_GET['id_periode'].'&id_kelas='.$_GET['id_kelas'].'&id_siswa='.$_GET['id_siswa'] ?>" target="_blank" rel="noopener noreferrer" class="btn btn-outline-warning btn-sm"> <i class="fa fa-print"></i> CETAK </a>
-        </div>
+    <div class="card  mb-4">
+        
         <div class="card-body">
             <table class="table">
                 <tbody>
@@ -218,5 +224,10 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $_GET['id_siswa'
     </div>
 
 </div>
+<script>
+    window.print();
+</script>
+
 <!-- /.container-fluid -->
-<?php include_once '../template/footer.php'; ?>
+</body>
+</html>
