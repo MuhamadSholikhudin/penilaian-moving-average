@@ -29,7 +29,7 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $_GET['id_siswa'
             <h6 class="m-0 font-weight-bold text-primary">
                 Rapot Siswa
             </h6>
-            <a href="<?= $url.'/app/rapot/rapot_cetak.php?id_periode='.$_GET['id_periode'].'&id_kelas='.$_GET['id_kelas'].'&id_siswa='.$_GET['id_siswa'] ?>" target="_blank" rel="noopener noreferrer" class="btn btn-outline-warning btn-sm"> <i class="fa fa-print"></i> CETAK </a>
+            <a href="<?= $url . '/app/rapot/rapot_cetak.php?id_periode=' . $_GET['id_periode'] . '&id_kelas=' . $_GET['id_kelas'] . '&id_siswa=' . $_GET['id_siswa'] ?>" target="_blank" rel="noopener noreferrer" class="btn btn-outline-warning btn-sm"> <i class="fa fa-print"></i> CETAK </a>
         </div>
         <div class="card-body">
             <table class="table">
@@ -195,25 +195,42 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $_GET['id_siswa'
                     </tr>
                 </thead>
                 <tbody>
-                <?php
-                $ekstra_kulikuler = "SELECT * FROM nilai_ekstra 
-                    JOIN ekstra_siswa ON nilai_ekstra.id_ekstra_siswa = ekstra_siswa.id_ekstra_siswa 
-                    WHERE nilai_ekstra.id_siswa = " . $_GET['id_siswa'] . " 
-                    AND ekstra_siswa.id_periode = " . $_GET['id_periode'] . "";
-                foreach (QueryManyData($ekstra_kulikuler) as $row) {
-                    $ekstra = QueryOnedata("SELECT * FROM ekstra WHERE id_ekstra = ".$row['id_ekstra']."")->fetch_assoc();
-                ?>
-                    <tr>
-                        <td><?= $ekstra['nm_ekstra'] ?></td>
-                        <td><?= $row['nilai'] ?></td>
-                        <td><?= ucwords(terbilang($row['nilai'])) ?></td>
-                    </tr>
-                <?php
-                }
-                ?>
-            </tbody>
+                    <?php
+                    $ekstra_kulikuler = "SELECT * FROM nilai_ekstra 
+                        JOIN ekstra_siswa ON nilai_ekstra.id_ekstra_siswa = ekstra_siswa.id_ekstra_siswa 
+                        WHERE nilai_ekstra.id_siswa = " . $_GET['id_siswa'] . " 
+                        AND ekstra_siswa.id_periode = " . $_GET['id_periode'] . "";
+                    foreach (QueryManyData($ekstra_kulikuler) as $row) {
+                        $ekstra = QueryOnedata("SELECT * FROM ekstra WHERE id_ekstra = " . $row['id_ekstra'] . "")->fetch_assoc();
+                    ?>
+                        <tr>
+                            <td><?= $ekstra['nm_ekstra'] ?></td>
+                            <td><?= $row['nilai'] ?></td>
+                            <td><?= ucwords(terbilang($row['nilai'])) ?></td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+
+                </tbody>
             </table>
-            
+            <table>
+
+                <body>
+                    <tr>
+                        <td style="width: 400px;"></td>
+                        <td style="width: 400px;"></td>
+                        <td>
+                            <div class="text-center">Wali Murid</div>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <div class="text-center"><?= $siswa['nm_wali'] ?></div>
+                        </td>
+                    </tr>
+                </body>
+            </table>
         </div>
     </div>
 
