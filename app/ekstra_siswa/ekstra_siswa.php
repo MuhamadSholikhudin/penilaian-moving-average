@@ -23,6 +23,50 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
+                <!-- <a href="<?= $url ?>/app/ekstra_siswa/ekstra_siswa_tambah.php" class="btn btn-info btn-sm btn-circle">
+                    <i class="fas fa-plus"></i>
+                </a> -->
+                Data Jadwal Ekstra
+            </h6>
+
+        </div>
+        <div class="card-body">
+            <table id="example" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Nama Ekstra</th>
+                        <th>Penanggung Jawab</th>
+                        <th>Jumlah Siswa</th>
+                        <th>AKSI</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach (QueryManyData("SELECT COUNT(*) as count, id_ekstra FROM ekstra_siswa GROUP BY id_ekstra") as $row) {
+                        // $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $row['id_siswa'] . " ")->fetch_assoc();
+                        $ekstra = QueryOnedata("SELECT nm_ekstra, penanggung_jawab FROM ekstra WHERE id_ekstra = " . $row['id_ekstra'] . " ")->fetch_assoc();
+                    ?>
+                        <tr>
+                            <td><?= $ekstra["nm_ekstra"] ?></td>
+                            <td><?= $ekstra["penanggung_jawab"] ?></td>
+                            <td><?= $row["count"] ?></td>
+                            <td>
+                                <a href="<?= $url ?>/app/ekstra_siswa/ekstra_siswa_id.php?id_ekstra=<?= $row["id_ekstra"] ?>" class="btn btn-info btn-sm ">
+                                    <i class="fas fa-eye"></i> Detail
+                                </a>
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--  -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
                 <a href="<?= $url ?>/app/ekstra_siswa/ekstra_siswa_tambah.php" class="btn btn-info btn-sm btn-circle">
                     <i class="fas fa-plus"></i>
                 </a>
