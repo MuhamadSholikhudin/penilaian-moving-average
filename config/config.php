@@ -8,7 +8,7 @@ $lokasi_foto = 'C:/xampp/htdocs/'.Url_web().'/foto';
 $path_sistem = 'C:/xampp/htdocs/'.Url_web().'';
 $YMDhis = date('YMDhis');
 function DB(){
-    return ["localhost", "root", "", "penilaian_ma"];
+    return ["localhost", "root", "password_baru", "penilaian_ma"];
 }
 function runQuery($sql) {
     try {

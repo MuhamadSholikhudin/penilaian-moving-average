@@ -23,7 +23,7 @@
         <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-                Data Nilai Mapel
+                Data Nilai Ekstra
             </h6>
         </div>
         <div class="card-body">
@@ -47,44 +47,35 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-                <a href="<?= $url ?>/app/nilai_ekstra/nilai_ekstra_tambah.php" class="btn btn-info btn-sm btn-circle">
-                    <i class="fas fa-plus"></i>
+                <a href="<?= $url ?>/app/nilai_mapel/nilai_mapel.php" class="btn btn-info btn-sm btn-circle">
+                    <i class="fas fa-arrow-left"></i>
                 </a>
-                Data Nilai Ekstra Siswa
-            </h6>
-
+                Data Nilai Ekstra Kelas 
+            </h6>          
         </div>
         <div class="card-body">
             <table id="example" class="display" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Siswa</th>
-                        <th>Ektrakulikuler</th>
-                        <th>Nilai</th>
-                        <th></th>
+                        <th>Kelas</th>
+                        <th>Jumlah</th>
                         <th>AKSI</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    foreach (QueryManyData("SELECT * FROM nilai_ekstra ") as $row) {
-                        $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $row['id_siswa'] . " ")->fetch_assoc();
-                        $ekstra = QueryOnedata("SELECT ekstra.nm_ekstra FROM ekstra LEFT JOIN ekstra_siswa ON ekstra.id_ekstra = ekstra_siswa.id_ekstra WHERE ekstra_siswa.id_ekstra_siswa = " . $row['id_ekstra_siswa'] . " ")->fetch_assoc();
+                    $query = "SELECT * FROM nilai_ekstra LEFT JOIN jadwal_siswa ON nilai_ekstra.id_jadwal = jadwal_siswa.id_jadwal_siswa GROUP BY jadwal_siswa.id_kelas ";
+                    foreach (QueryManyData($query) as $row) {
+                        $kelas = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = " . $row['id_kelas'] . " ")->fetch_assoc();
+                        $nilai = QueryOnedata("SELECT COUNT(*) as count FROM nilai_ekstra LEFT JOIN jadwal_siswa ON nilai_ekstra.id_jadwal = jadwal_siswa.id_jadwal_siswa WHERE jadwal_siswa.id_kelas = " . $row['id_kelas'] . " ")->fetch_assoc();
                     ?>
                         <tr>
-                            <td><?= $siswa["nm_siswa"] ?></td>
+                            <td><?= $kelas["kelas"] ?> <?= $kelas["nm_kelas"] ?></td>
+                            <td><?= $nilai["count"] ?></td>
                             <td>
-                                <?= $ekstra["nm_ekstra"] ?>
-                            </td>
-                            <td><?= $row["nilai"] ?></td>
-                            <td><?= $row["ket_nilai"] ?></td>
-                            <td>
-                                <a href="<?= $url ?>/app/nilai_ekstra/nilai_ekstra_edit.php?id_nilai_ekstra=<?= $row["id_nilai_ekstra"] ?>" class="btn btn-warning btn-sm btn-circle">
-                                    <i class="fas fa-edit"></i>
+                                <a href="<?= $url ?>/app/nilai_ekstra/nilai_ekstra_idkelas.php?id_kelas=<?= $row["id_kelas"] ?>" class="btn btn-info ">
+                                    <i class="fas fa-eye"></i> Detail
                                 </a>
-                                <button onclick="ConfirmDelete(<?= $row['id_nilai_ekstra'] ?>)" class="btn btn-danger btn-sm btn-circle">
-                                    <i class="fas fa-trash"></i>
-                                </button>
                             </td>
                         </tr>
                     <?php

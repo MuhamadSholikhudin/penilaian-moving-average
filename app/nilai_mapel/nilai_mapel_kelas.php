@@ -8,7 +8,7 @@ include_once '../template/navbar.php';
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Kehadiran Siswa Page</h1>
+    <h1 class="h3 mb-4 text-gray-800">Nilai Mapel Page</h1>
     <?php
     if (isset($_SESSION['message'])) {
     ?>
@@ -25,10 +25,10 @@ include_once '../template/navbar.php';
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-                <a href="<?= $url ?>/app/kehadiran_siswa/kehadiran_siswa.php" class="btn btn-info btn-sm btn-circle">
+                <a href="<?= $url ?>/app/nilai_mapel/nilai_mapel.php" class="btn btn-info btn-sm btn-circle">
                     <i class="fas fa-arrow-left"></i>
                 </a>
-                Data Kehadiran Siswa Kelas 
+                Data Nilai Mapel Kelas 
             </h6>          
         </div>
         <div class="card-body">
@@ -42,16 +42,16 @@ include_once '../template/navbar.php';
                 </thead>
                 <tbody>
                     <?php
-                    $query = "SELECT * FROM kehadiran_siswa LEFT JOIN siswa ON kehadiran_siswa.id_siswa  =  siswa.id_siswa GROUP BY siswa.id_kelas ";
+                    $query = "SELECT * FROM nilai_mapel LEFT JOIN jadwal_siswa ON nilai_mapel.id_jadwal = jadwal_siswa.id_jadwal_siswa GROUP BY jadwal_siswa.id_kelas ";
                     foreach (QueryManyData($query) as $row) {
                         $kelas = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = " . $row['id_kelas'] . " ")->fetch_assoc();
-                        $siswa = QueryOnedata("SELECT COUNT(*) as count FROM siswa WHERE id_kelas = " . $row['id_kelas'] . " ")->fetch_assoc();
+                        $nilai = QueryOnedata("SELECT COUNT(*) as count FROM nilai_mapel LEFT JOIN jadwal_siswa ON nilai_mapel.id_jadwal = jadwal_siswa.id_jadwal_siswa WHERE jadwal_siswa.id_kelas = " . $row['id_kelas'] . " ")->fetch_assoc();
                     ?>
                         <tr>
                             <td><?= $kelas["kelas"] ?> <?= $kelas["nm_kelas"] ?></td>
-                            <td><?= $siswa["count"] ?></td>
+                            <td><?= $nilai["count"] ?></td>
                             <td>
-                                <a href="<?= $url ?>/app/kehadiran_siswa/kehadiran_siswa_idkelas.php?id_kelas=<?= $row["id_kelas"] ?>" class="btn btn-info ">
+                                <a href="<?= $url ?>/app/nilai_mapel/nilai_mapel_idkelas.php?id_kelas=<?= $row["id_kelas"] ?>" class="btn btn-info ">
                                     <i class="fas fa-eye"></i> Detail
                                 </a>
                             </td>

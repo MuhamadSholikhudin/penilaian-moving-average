@@ -2,7 +2,8 @@
 include_once '../template/header.php'; 
 include_once '../template/sidebar.php'; 
 include_once '../template/navbar.php'; 
- ?>
+$kelas = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = ".$_GET['id_kelas']."")->fetch_assoc();
+?>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -24,36 +25,44 @@ include_once '../template/navbar.php';
     ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-                <a href="<?= $url ?>/app/kehadiran_siswa/kehadiran_siswa.php" class="btn btn-info btn-sm btn-circle">
+            <h6 class="m-0 font-weight-bold text-primary">        
+                <a href="<?= $url ?>/app/kehadiran_siswa/kehadiran_siswa_kelas.php" class="btn btn-info btn-sm btn-circle">
                     <i class="fas fa-arrow-left"></i>
-                </a>
-                Data Kehadiran Siswa Kelas 
-            </h6>          
+                </a>        
+                Data Kehadiran Siswa Kelas <?= $kelas['kelas']." ".$kelas['nm_kelas'] ?>
+            </h6>
         </div>
+
         <div class="card-body">
             <table id="example" class="display" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Kelas</th>
-                        <th>Jumlah</th>
+                        <th>Siswa</th>
+                        <th>Tanggal</th>
+                        <th>Jam Masuk</th>
+                        <th>Jam Pulang</th>
+                        <th>Status</th>
+                        <th>Keterangan</th>
                         <th>AKSI</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    $query = "SELECT * FROM kehadiran_siswa LEFT JOIN siswa ON kehadiran_siswa.id_siswa  =  siswa.id_siswa GROUP BY siswa.id_kelas ";
-                    foreach (QueryManyData($query) as $row) {
-                        $kelas = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = " . $row['id_kelas'] . " ")->fetch_assoc();
-                        $siswa = QueryOnedata("SELECT COUNT(*) as count FROM siswa WHERE id_kelas = " . $row['id_kelas'] . " ")->fetch_assoc();
+                    $query_kehadiran_per_kelas = "SELECT * FROM kehadiran_siswa JOIN siswa ON kehadiran_siswa.id_siswa = siswa.id_siswa WHERE siswa.id_kelas = ".$_GET['id_kelas'].""; 
+                    foreach (QueryManyData($query_kehadiran_per_kelas) as $row) {
+                        $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $row['id_siswa'] . " ")->fetch_assoc();
                     ?>
                         <tr>
-                            <td><?= $kelas["kelas"] ?> <?= $kelas["nm_kelas"] ?></td>
-                            <td><?= $siswa["count"] ?></td>
+                            <td><?= $siswa["nm_siswa"] ?></td>
+                            <td><?= $row["tgl_masuk"] ?></td>
+                            <td><?= $row["jam_masuk"] ?></td>
+                            <td><?= $row["jam_pulang"] ?></td>
+                            <td><?= $row["status"] ?></td>
+                            <td><?= $row["keterangan"] ?></td>
                             <td>
-                                <a href="<?= $url ?>/app/kehadiran_siswa/kehadiran_siswa_idkelas.php?id_kelas=<?= $row["id_kelas"] ?>" class="btn btn-info ">
-                                    <i class="fas fa-eye"></i> Detail
-                                </a>
+                                <a href="<?= $url ?>/app/kehadiran_siswa/kehadiran_siswa_edit.php?id_kehadiran=<?= $row["id_kehadiran"] ?>" class="btn btn-warning btn-sm btn-circle">
+                                    <i class="fas fa-edit"></i>
+                                </a>                               
                             </td>
                         </tr>
                     <?php

@@ -23,7 +23,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-                Data Kehadiran siswa
+                Data Kehadiran Siswa
             </h6>
         </div>
         <div class="card-body">
@@ -52,14 +52,10 @@
                             <a href="<?= $url ?>/app/kehadiran_siswa/kehadiran_siswa_hari.php" class="btn btn-facebook btn-block"><i class="fa fa-arrow-circle-right fa-fw"></i> Lihat Data</a>
                         </div>
                     </div>
-                </div>
-
-                
+                </div>                
             </div>
         </div>
     </div>
-
-
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">

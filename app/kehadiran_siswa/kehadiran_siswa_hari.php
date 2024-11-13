@@ -2,11 +2,10 @@
 include_once '../template/header.php'; 
 include_once '../template/sidebar.php'; 
 include_once '../template/navbar.php'; 
- ?>
+?>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Kehadiran Siswa Page</h1>
     <?php
@@ -42,16 +41,24 @@ include_once '../template/navbar.php';
                 </thead>
                 <tbody>
                     <?php
-                    $query = "SELECT * FROM kehadiran_siswa LEFT JOIN siswa ON kehadiran_siswa.id_siswa  =  siswa.id_siswa GROUP BY siswa.id_kelas ";
-                    foreach (QueryManyData($query) as $row) {
-                        $kelas = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = " . $row['id_kelas'] . " ")->fetch_assoc();
-                        $siswa = QueryOnedata("SELECT COUNT(*) as count FROM siswa WHERE id_kelas = " . $row['id_kelas'] . " ")->fetch_assoc();
+                    $days = [
+                        1 =>	"Minggu",
+                        2 =>	"Senin",
+                        3 =>	"Selasa",
+                        4 =>	"Rabu",
+                        5 =>	"Kamis",
+                        6 =>	"Jumat",
+                        7 =>	"Sabtu"
+                    ];
+                    foreach ($days as $key => $val) {
+                        $query = "SELECT COUNT(*) as count FROM kehadiran_siswa WHERE DAYOFWEEK(tgl_masuk) =".$key."";
+                        $kehadiran = QueryOnedata($query)->fetch_assoc();
                     ?>
                         <tr>
-                            <td><?= $kelas["kelas"] ?> <?= $kelas["nm_kelas"] ?></td>
-                            <td><?= $siswa["count"] ?></td>
+                            <td><?= $val ?></td>
+                            <td><?= $kehadiran['count'] ?></td>
                             <td>
-                                <a href="<?= $url ?>/app/kehadiran_siswa/kehadiran_siswa_idkelas.php?id_kelas=<?= $row["id_kelas"] ?>" class="btn btn-info ">
+                                <a href="<?= $url ?>/app/kehadiran_siswa/kehadiran_siswa_idhari.php?hari=<?= $val ?>" class="btn btn-info ">
                                     <i class="fas fa-eye"></i> Detail
                                 </a>
                             </td>
@@ -74,5 +81,4 @@ include_once '../template/navbar.php';
     </script>
 </div>
 <!-- /.container-fluid -->
-
 <?php include_once '../template/footer.php'; ?>
