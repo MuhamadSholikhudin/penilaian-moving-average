@@ -51,8 +51,8 @@
                             <td><?= $siswa["nm_siswa"] ?></td>
                             <td><?= $kelas["kelas"] ?> <?= $kelas["nm_kelas"] ?></td>
                             <td>
-                                <a href="<?= $url ?>/app/ekstra_siswa/ekstra_siswa_id.php?id_ekstra=<?= $row["id_ekstra"] ?>" class="btn btn-info btn-sm ">
-                                    <i class="fas fa-eye"></i> Detail
+                                <a href="<?= $url ?>/app/ekstra_siswa/ekstra_siswa_edit.php?id_ekstra_siswa=<?= $row["id_ekstra_siswa"] ?>" class="btn btn-warning btn-sm ">
+                                    <i class="fas fa-edit"></i> edit
                                 </a>
                             </td>
                         </tr>

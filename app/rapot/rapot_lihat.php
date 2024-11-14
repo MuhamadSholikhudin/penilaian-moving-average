@@ -211,7 +211,6 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $_GET['id_siswa'
                     <?php
                     }
                     ?>
-
                 </tbody>
             </table>
             <table>

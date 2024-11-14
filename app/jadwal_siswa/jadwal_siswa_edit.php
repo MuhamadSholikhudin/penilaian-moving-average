@@ -106,7 +106,7 @@ $jadwal_siswa = QueryOnedata("SELECT * FROM jadwal_siswa WHERE id_jadwal_siswa =
                     </div>
                 </div>
                 <div class="mb-3 row">
-                    <label for="hari" class="col-sm-2 col-form-label">Guru</label>
+                    <label for="hari" class="col-sm-2 col-form-label">Hari</label>
                     <div class="col-sm-10">
                         <select class="form-control" name="hari" id="hari">
                             <?php

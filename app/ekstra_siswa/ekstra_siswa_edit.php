@@ -30,14 +30,16 @@ $ekstra_siswa = QueryOnedata("SELECT * FROM ekstra_siswa WHERE id_ekstra_siswa =
                         <select class="form-control" name="id_siswa" id="id_siswa">
                             <?php
                             foreach (QueryManyData("SELECT * FROM siswa ") as $row) {
+                                $kelas = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = ".$row['id_kelas']."")->fetch_assoc();
                                 if ($row["id_siswa"] == $ekstra_siswa['id_siswa']) {
                             ?>
-                                    <option value="<?= $row["id_siswa"] ?>" selected> <?= $row["nm_siswa"] ?> </option>
+                                    <option value="<?= $row["id_siswa"] ?>" selected> <?= $row["nis"] ?> | <?= $row["nm_siswa"] ?> | <?= $kelas['kelas'] ?> <?= $kelas['nm_kelas'] ?></option>
+
                                 <?php
                                 } else {
                                 ?>
-                                    <option value="<?= $row["id_siswa"] ?>"> <?= $row["nis"] ?> | <?= $row["nm_siswa"] ?> </option>
-                            <?php
+                                    <option value="<?= $row["id_siswa"] ?>" > <?= $row["nis"] ?> | <?= $row["nm_siswa"] ?> | <?= $kelas['kelas'] ?> <?= $kelas['nm_kelas'] ?></option>
+                                    <?php
                                 }
                             }
                             ?>

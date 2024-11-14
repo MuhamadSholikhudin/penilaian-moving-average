@@ -26,8 +26,9 @@
                         <select class="form-control js-example-basic-single" name="id_siswa" id="id_siswa">
                             <?php
                             foreach (QueryManyData("SELECT * FROM siswa ") as $row) {
+                                $kelas = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = ".$row['id_kelas']."")->fetch_assoc();
                             ?>
-                                <option value="<?= $row["id_siswa"] ?>"> <?= $row["nis"] ?> | <?= $row["nm_siswa"] ?> </option>
+                                <option value="<?= $row["id_siswa"] ?>"> <?= $row["nis"] ?> | <?= $row["nm_siswa"] ?> | <?= $kelas['kelas'] ?> <?= $kelas['nm_kelas'] ?></option>
                             <?php
                             }
                             ?>
@@ -41,7 +42,7 @@
                             <?php
                             foreach (QueryManyData("SELECT * FROM ekstra ") as $row) {
                             ?>
-                                <option value="<?= $row["id_ekstra"] ?>"> <?= $row["nm_ekstra"] ?> </option>
+                                <option value="<?= $row["id_ekstra"] ?>"> <?= $row["nm_ekstra"] ?> [<?= $row["penanggung_jawab"] ?>]</option>
                             <?php
                             }
                             ?>

@@ -13,7 +13,7 @@ if (isset($_POST['simpanguru'])) {
 
     if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
         if ($ukuran < 1044070) {
-            $upload_guru =  move_uploaded_file($file_tmp, '../../foto/guru/' . $nama_file);
+            $upload_guru =  move_uploaded_file($file_tmp, $lokasi_foto.'/guru/' . $nama_file);
             if ($upload_guru) {
                 // Data yang ingin Execution
                 $data = [
@@ -52,8 +52,10 @@ if (isset($_POST['simpanguru'])) {
 
         if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
             if ($ukuran < 1044070) {
-                unlink('../../foto/guru/' .  $_POST['foto_old']);
-                $upload_guru =  move_uploaded_file($file_tmp, '../../foto/guru/' . $nama_file);
+                $upload_guru =  move_uploaded_file($file_tmp, $lokasi_foto.'/guru/' . $nama_file);
+
+                // unlink('../../foto/guru/' .  $_POST['foto_old']);
+                // $upload_guru =  move_uploaded_file($file_tmp, '../../foto/guru/' . $nama_file);
             } else {
                 $nama_file = $_POST['foto_old'];
             }

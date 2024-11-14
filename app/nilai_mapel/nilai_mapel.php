@@ -6,7 +6,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Nilai Siswa Page</h1>
+    <h1 class="h3 mb-4 text-gray-800">Nilai Mapel Page</h1>
     <?php
     if (isset($_SESSION['message'])) {
     ?>
@@ -20,7 +20,7 @@
         unset($_SESSION['message']);
     }
     ?>
-
+    <?php if($_SESSION['level'] == 'wakasiswa'){ ?> 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
@@ -44,7 +44,7 @@
             </div>
         </div>
     </div>
-
+    <?php } ?>
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -116,7 +116,7 @@
                             <td><?= $row["nilai"] ?></td>
                             <td><?= $row["ket_nilai"] ?></td>
                             <td>
-                                <a href="<?= $url ?>/app/nilai_mapel_edit.php?id_nilai_mapel=<?= $row["id_nilai_mapel"] ?>" class="btn btn-warning btn-sm btn-circle">
+                                <a href="<?= $url ?>/app/nilai_mapel/nilai_mapel_edit.php?id_nilai_mapel=<?= $row["id_nilai_mapel"] ?>" class="btn btn-warning btn-sm btn-circle">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <button onclick="ConfirmDelete(<?= $row['id_nilai_mapel'] ?>)" class="btn btn-danger btn-sm btn-circle">

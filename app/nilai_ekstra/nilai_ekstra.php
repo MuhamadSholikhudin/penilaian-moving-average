@@ -6,7 +6,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Nilai Siswa Page</h1>
+    <h1 class="h3 mb-4 text-gray-800">Nilai Ekstra Siswa Page</h1>
     <?php
     if (isset($_SESSION['message'])) {
     ?>
@@ -20,10 +20,11 @@
         unset($_SESSION['message']);
     }
     ?>
-        <div class="card shadow mb-4">
+    <?php if($_SESSION['level'] == 'wakasiswa'){ ?> 
+    <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-                Data Nilai Mapel
+                Data Nilai Ekstra Siswa
             </h6>
         </div>
         <div class="card-body">
@@ -43,7 +44,8 @@
             </div>
         </div>
     </div>
-    
+    <?php } ?>
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
@@ -60,8 +62,9 @@
                     <tr>
                         <th>Siswa</th>
                         <th>Ektrakulikuler</th>
+                        <th>Penanggung Jawab</th>
                         <th>Nilai</th>
-                        <th></th>
+                        <th>Keterangan</th>
                         <th>AKSI</th>
                     </tr>
                 </thead>
@@ -69,13 +72,12 @@
                     <?php
                     foreach (QueryManyData("SELECT * FROM nilai_ekstra ") as $row) {
                         $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $row['id_siswa'] . " ")->fetch_assoc();
-                        $ekstra = QueryOnedata("SELECT ekstra.nm_ekstra FROM ekstra LEFT JOIN ekstra_siswa ON ekstra.id_ekstra = ekstra_siswa.id_ekstra WHERE ekstra_siswa.id_ekstra_siswa = " . $row['id_ekstra_siswa'] . " ")->fetch_assoc();
+                        $ekstra = QueryOnedata("SELECT ekstra.nm_ekstra, ekstra.penanggung_jawab FROM ekstra LEFT JOIN ekstra_siswa ON ekstra.id_ekstra = ekstra_siswa.id_ekstra WHERE ekstra_siswa.id_ekstra_siswa = " . $row['id_ekstra_siswa'] . " ")->fetch_assoc();
                     ?>
                         <tr>
                             <td><?= $siswa["nm_siswa"] ?></td>
-                            <td>
-                                <?= $ekstra["nm_ekstra"] ?>
-                            </td>
+                            <td><?= $ekstra["nm_ekstra"] ?></td>
+                            <td><?= $ekstra["penanggung_jawab"] ?></td>
                             <td><?= $row["nilai"] ?></td>
                             <td><?= $row["ket_nilai"] ?></td>
                             <td>
@@ -99,7 +101,7 @@
             let text = "Apakah Anda Yakin Ingin Menghapus data!\n OK or Cancel.";
             if (confirm(text) == true) {
                 text = "You pressed OK!";
-                window.location.href = "<?= $url ?>/app/aksi/jadwal_siswa.php?id_jadwal_siswa=" + id + "&action=delete";
+                window.location.href = "<?= $url ?>/aksi/nilai_ekstra.php?id_nilai_ekstra=" + id + "&action=delete";
             }
         }
     </script>

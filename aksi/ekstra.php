@@ -11,7 +11,7 @@ if (isset($_POST['simpanekstra'])) {
     ];
     // Insert satu data
     $process = InsertOnedata("ekstra", $data);
-    $_SESSION['message'] = "Data Ekstra " . $process['message'];
+    $_SESSION['message'] = "<strong>Success !</strong> Data Ekstra " . $process['message'];
     header("Location: " . $url . "/app/ekstra/ekstra.php");
     exit();
 } elseif (isset($_POST['updateekstra'])) {
@@ -23,12 +23,18 @@ if (isset($_POST['simpanekstra'])) {
     ];
     // Update data berdasarkan
     $process = UpdateOneData("ekstra", $data, " WHERE id_ekstra = " . $_POST['id_ekstra'] . "");
-    $_SESSION['message'] = "Data Ekstra " . $process['message'];
+    $_SESSION['message'] = "<strong>Success !</strong> Data Ekstra " . $process['message'];
     header("Location: " . $url . "/app/ekstra/ekstra.php");
     exit();
 } elseif ($_GET['action'] == 'delete') {
+    $check_ekstra = QueryOnedata("SELECT * FROM ekstra WHERE id_ekstra = ".$_GET['id_ekstra']."");
+    if($check_ekstra->num_rows > 0){
+        $_SESSION['message'] = "<strong>Gagal !</strong> Data Ekstra tidak dapat di hapus karena masih di pakai pada ekstra siswa";
+        header("Location: ".$url."/app/ekstra/ekstra.php");
+        exit(); 
+    }
     $process = DeleteOneData("ekstra", "WHERE id_ekstra = " . $_GET['id_ekstra'] . "");
-    $_SESSION['message'] = "Data Ekstra " . $process['message'];
+    $_SESSION['message'] = "<strong>Success !</strong> Data Ekstra " . $process['message'];
     header("Location: " . $url . "/app/ekstra/ekstra.php");
     exit();
 }

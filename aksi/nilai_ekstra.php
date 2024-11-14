@@ -12,7 +12,7 @@ if(isset($_POST['simpannilai_ekstra'])){
         ];    
         // Insert satu data
         $process = InsertOnedata("nilai_ekstra", $data);
-        $_SESSION['message'] = "Data Kelas ".$process['message'];
+        $_SESSION['message'] = "Data Nilai Ekstra ".$process['message'];
         header("Location: ".$url."/app/nilai_ekstra/nilai_ekstra.php");
         exit(); 
 }elseif(isset($_POST['updatenilai_ekstra'])){
@@ -25,12 +25,12 @@ if(isset($_POST['simpannilai_ekstra'])){
         ];    
         // Update data berdasarkan
         $process = UpdateOneData("nilai_ekstra", $data, " WHERE id_nilai_ekstra = ".$_POST['id_nilai_ekstra']."");
-        $_SESSION['message'] = "Data Kelas ".$process['message'];
+        $_SESSION['message'] = "Data Nilai Ekstra ".$process['message'];
         header("Location: ".$url."/app/nilai_ekstra/nilai_ekstra.php");
         exit(); 
 }elseif($_GET['action'] == 'delete'){
     $process = DeleteOneData("nilai_ekstra", "WHERE id_nilai_ekstra = ".$_GET['id_nilai_ekstra']."");
-    $_SESSION['message'] = "Data Kelas ".$process['message'];
+    $_SESSION['message'] = "Data Nilai Ekstra ".$process['message'];
     header("Location: ".$url."/app/nilai_ekstra/nilai_ekstra.php");
     exit(); 
 }

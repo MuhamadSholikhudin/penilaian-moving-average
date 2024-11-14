@@ -11,7 +11,7 @@
     if (isset($_SESSION['message'])) {
     ?>
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Success !</strong> <?= $_SESSION['message'] ?>
+            <?= $_SESSION['message'] ?>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -21,6 +21,7 @@
     }
     ?>
 
+    <?php if($_SESSION['level'] == 'wakasiswa'){ ?> 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
@@ -72,7 +73,7 @@
             </div>
         </div>
     </div>
-
+    <?php } ?>
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -140,11 +141,6 @@
             }
         }
     </script>
-
-
-
-
-
 </div>
 <!-- /.container-fluid -->
 

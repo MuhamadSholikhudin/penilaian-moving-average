@@ -20,6 +20,8 @@
         unset($_SESSION['message']);
     }
     ?>
+    
+    <?php if($_SESSION['level'] == 'wakasiswa'){ ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
@@ -56,6 +58,7 @@
             </div>
         </div>
     </div>
+    <?php } ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">

@@ -12,7 +12,7 @@ if(isset($_POST['simpannilai_mapel'])){
         ];    
         // Insert satu data
         $process = InsertOnedata("nilai_mapel", $data);
-        $_SESSION['message'] = "Data Kelas ".$process['message'];
+        $_SESSION['message'] = "Data Nilai Mapel ".$process['message'];
         header("Location: ".$url."/app/nilai_mapel/nilai_mapel.php");
         exit(); 
 }elseif(isset($_POST['updatenilai_mapel'])){
@@ -25,12 +25,12 @@ if(isset($_POST['simpannilai_mapel'])){
         ];    
         // Update data berdasarkan
         $process = UpdateOneData("nilai_mapel", $data, " WHERE id_nilai_mapel = ".$_POST['id_nilai_mapel']."");
-        $_SESSION['message'] = "Data Kelas ".$process['message'];
+        $_SESSION['message'] = "Data Nilai Mapel ".$process['message'];
         header("Location: ".$url."/app/nilai_mapel/nilai_mapel.php");
         exit(); 
 }elseif($_GET['action'] == 'delete'){
     $process = DeleteOneData("nilai_mapel", "WHERE id_nilai_mapel = ".$_GET['id_nilai_mapel']."");
-    $_SESSION['message'] = "Data Kelas ".$process['message'];
+    $_SESSION['message'] = "Data Nilai Mapel ".$process['message'];
     header("Location: ".$url."/app/nilai_mapel/nilai_mapel.php");
     exit(); 
 }
@@ -86,7 +86,7 @@ if (isset($_FILES['excel_file'])) {
         }
         */
     }
-    $_SESSION['message'] = "Data Kelas ".$process['message'];
+    $_SESSION['message'] = "Data Nilai Mapel ".$process['message'];
     header("Location: ".$url."/app/nilai_mapel/nilai_mapel.php");
     exit(); 
 }

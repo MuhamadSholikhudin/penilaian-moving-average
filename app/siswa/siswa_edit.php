@@ -2,8 +2,8 @@
 <?php include_once '../template/sidebar.php'; ?>
 <?php include_once '../template/navbar.php'; ?>
 
-<?php 
-$siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = ".$_GET['id_siswa']." ")->fetch_assoc();
+<?php
+$siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $_GET['id_siswa'] . " ")->fetch_assoc();
 ?>
 
 <!-- Begin Page Content -->
@@ -21,9 +21,9 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = ".$_GET['id_siswa'].
         </div>
         <div class="card-body">
             <form action="<?= $url ?>/aksi/siswa.php" method="POST" enctype="multipart/form-data">
-            <input type="hidden" class="form-control" id="id_siswa" name="id_siswa" value="<?= $siswa['id_siswa'] ?>" required>
+                <input type="hidden" class="form-control" id="id_siswa" name="id_siswa" value="<?= $siswa['id_siswa'] ?>" required>
 
-            <div class="mb-3 row">
+                <div class="mb-3 row">
                     <label for="nis" class="col-sm-2 col-form-label">Nomor Induk Siswa</label>
                     <div class="col-sm-10">
                         <input type="number" class="form-control" id="nis" name="nis" value="<?= $siswa['nis'] ?>" required>
@@ -44,32 +44,33 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = ".$_GET['id_siswa'].
                 <div class="mb-3 row">
                     <label for="jk_siswa" class="col-sm-2 col-form-label">Jenis Kelamin</label>
                     <div class="col-sm-10">
-                        <select  class="form-control" name="jk_siswa" id="jk_siswa">
-                        <?php $kelamin = ['L' => 'Laki-Laki', 'P' => 'Perempuan']; ?>
-                            <?php foreach($kelamin as $key => $val){
-                                if($val == $siswa['jk_siswa']){
-                                    ?>
+                        <select class="form-control" name="jk_siswa" id="jk_siswa">
+                            <?php $kelamin = ['L' => 'Laki-Laki', 'P' => 'Perempuan']; ?>
+                            <?php foreach ($kelamin as $key => $val) {
+                                if ($val == $siswa['jk_siswa']) {
+                            ?>
                                     <option value="<?= $key ?>" selected><?= $val ?></option>
                                 <?php } else {
                                 ?>
-                                <option value="<?= $key ?>"><?= $val ?></option>
-                            <?php } }
+                                    <option value="<?= $key ?>"><?= $val ?></option>
+                            <?php }
+                            }
                             ?>
                         </select>
-                        
-                    </div>                
+
+                    </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="kelas" class="col-sm-2 col-form-label">Kelas</label>
                     <div class="col-sm-10">
-                        <select  class="form-control" name="id_kelas" id="kelas">
-                        <?php
-                        foreach (QueryManyData("SELECT * FROM kelas") as $row) {
-                        ?>
-                            <option value="<?= $row['id_kelas'] ?>"><?= $row['kelas'] ?></option>
+                        <select class="form-control" name="id_kelas" id="kelas">
+                            <?php
+                            foreach (QueryManyData("SELECT * FROM kelas") as $row) {
+                            ?>
+                                <option value="<?= $row['id_kelas'] ?>"><?= $row['kelas'] ?></option>
                             <?php } ?>
                         </select>
-                    </div>                
+                    </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="no_hp" class="col-sm-2 col-form-label">Nomer HP</label>
@@ -86,25 +87,24 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = ".$_GET['id_siswa'].
                 <div class="mb-3 row">
                     <label for="status" class="col-sm-2 col-form-label">Status</label>
                     <div class="col-sm-10">
-                        <?php 
-                            $status = [
-                                "Aktif",
-                                "Tidak Aktif",
-                            ];
+                        <?php
+                        $status = [
+                            "Aktif",
+                            "Tidak Aktif",
+                        ];
                         ?>
                         <select class="form-control" name="status_siswa" id="status">
                             <?php
-                            foreach($status as $val) {       
-                                if($val == $siswa['status_siswa']){
-                                    ?>
+                            foreach ($status as $val) {
+                                if ($val == $siswa['status_siswa']) {
+                            ?>
                                     <option value="<?= $val ?>" selected><?= $val ?></option>
                                 <?php
-                                }else{
-                                    ?>
+                                } else {
+                                ?>
                                     <option value="<?= $val ?>"><?= $val ?></option>
-                                <?php
-                                }                          
-                                                                                                             
+                            <?php
+                                }
                             }
                             ?>
                         </select>
