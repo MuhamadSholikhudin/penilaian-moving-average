@@ -1,11 +1,11 @@
 <?php
 function Url_web(){
-    return "/penilaian-moving-average";
+    $xplode = explode("/", $_SERVER['REQUEST_URI']);
+    return $xplode[1];
 }
-$defaul_uri = Url_web();
+$defaul_uri = "/".Url_web();
 $url = "http://".$_SERVER['SERVER_NAME']."".$defaul_uri;
-$path_sistem = 'C:/xampp/htdocs/'.Url_web().'';
-$lokasi_foto = $path_sistem .'/foto';
+$lokasi_foto = $_SERVER['DOCUMENT_ROOT'].$defaul_uri.'/foto';
 $YMDhis = date('YMDhis');
 function DB(){
     return ["localhost", "root", "", "penilaian_ma"];
