@@ -1,16 +1,16 @@
-<?php 
-include_once '../template/header.php'; 
-include_once '../template/sidebar.php'; 
-include_once '../template/navbar.php'; 
+<?php
+include_once '../template/header.php';
+include_once '../template/sidebar.php';
+include_once '../template/navbar.php';
 
 $days = [
-    1 =>	"Minggu",
-    2 =>	"Senin",
-    3 =>	"Selasa",
-    4 =>	"Rabu",
-    5 =>	"Kamis",
-    6 =>	"Jumat",
-    7 =>	"Sabtu"
+    1 =>    "Minggu",
+    2 =>    "Senin",
+    3 =>    "Selasa",
+    4 =>    "Rabu",
+    5 =>    "Kamis",
+    6 =>    "Jumat",
+    7 =>    "Sabtu"
 ];
 
 $key_day = array_search($_GET['hari'], $days);
@@ -36,16 +36,16 @@ $key_day = array_search($_GET['hari'], $days);
     ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">     
+            <h6 class="m-0 font-weight-bold text-primary">
                 <a href="<?= $url ?>/app/kehadiran_siswa/kehadiran_siswa_hari.php" class="btn btn-info btn-sm btn-circle">
                     <i class="fas fa-arrow-left"></i>
-                </a>                           
+                </a>
                 Data Kehadiran Siswa Hari <?= $_GET['hari'] ?>
             </h6>
         </div>
 
-        <div class="card-body">
-            <table id="example" class="display" style="width:100%">
+        <div class="card-body table-responsive">
+            <table id="example" class="display  table" style="width:100%">
                 <thead>
                     <tr>
                         <th>Siswa</th>
@@ -59,7 +59,7 @@ $key_day = array_search($_GET['hari'], $days);
                 </thead>
                 <tbody>
                     <?php
-                    $query_kehadiran_per_hari = "SELECT * FROM kehadiran_siswa  WHERE DAYOFWEEK(tgl_masuk) = ".$key_day.""; 
+                    $query_kehadiran_per_hari = "SELECT * FROM kehadiran_siswa  WHERE DAYOFWEEK(tgl_masuk) = " . $key_day . "";
                     foreach (QueryManyData($query_kehadiran_per_hari) as $row) {
                         $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $row['id_siswa'] . " ")->fetch_assoc();
                     ?>
@@ -73,7 +73,7 @@ $key_day = array_search($_GET['hari'], $days);
                             <td>
                                 <a href="<?= $url ?>/app/kehadiran_siswa/kehadiran_siswa_edit.php?id_kehadiran=<?= $row["id_kehadiran"] ?>" class="btn btn-warning btn-sm btn-circle">
                                     <i class="fas fa-edit"></i>
-                                </a>                               
+                                </a>
                             </td>
                         </tr>
                     <?php

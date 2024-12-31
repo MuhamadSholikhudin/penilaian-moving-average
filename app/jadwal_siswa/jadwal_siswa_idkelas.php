@@ -32,8 +32,8 @@ $kls = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = ".$_GET['id_kelas'].""
                 Data Jadwal Siswa kelas <?= $kls['kelas']." ".$kls['nm_kelas'] ?>
             </h6>
         </div>
-        <div class="card-body">
-            <table id="example" class="display" style="width:100%">
+        <div class="card-body table-responsive">
+            <table id="example" class="display table" style="width:100%">
                 <thead>
                     <tr>
                         <th>Siswa</th>

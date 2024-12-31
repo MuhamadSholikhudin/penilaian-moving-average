@@ -1,10 +1,8 @@
 <?php include_once '../template/header.php'; ?>
 <?php include_once '../template/sidebar.php'; ?>
 <?php include_once '../template/navbar.php'; ?>
-
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">User Page</h1>
     <?php
@@ -28,10 +26,9 @@
                 </a>
                 Data User
             </h6>
-
         </div>
-        <div class="card-body">
-            <table id="example" class="display" style="width:100%">
+        <div class="card-body table-responsive">
+            <table id="example" class="display table" style="width:100%">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -75,11 +72,10 @@
             let text = "Apakah Anda Yakin Ingin Menghapus data!\n OK or Cancel.";
             if (confirm(text) == true) {
                 text = "You pressed OK!";
-                window.location.href = "<?= $url ?>/aksi/user.php?id_user="+id+"&action=delete";
-            } 
+                window.location.href = "<?= $url ?>/aksi/user.php?id_user=" + id + "&action=delete";
+            }
         }
     </script>
 </div>
 <!-- /.container-fluid -->
-
 <?php include_once '../template/footer.php'; ?>

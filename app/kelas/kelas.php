@@ -1,10 +1,8 @@
 <?php include_once '../template/header.php'; ?>
 <?php include_once '../template/sidebar.php'; ?>
 <?php include_once '../template/navbar.php'; ?>
-
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Kelas Page</h1>
     <?php
@@ -30,8 +28,8 @@
             </h6>
 
         </div>
-        <div class="card-body">
-            <table id="example" class="display" style="width:100%">
+        <div class="card-body table-responsive">
+            <table id="example" class="display table" style="width:100%">
                 <thead>
                     <tr>
                         <th>NAMA KELAS</th>
@@ -71,12 +69,6 @@
             } 
         }
     </script>
-
-
-
-
-
 </div>
 <!-- /.container-fluid -->
-
 <?php include_once '../template/footer.php'; ?>

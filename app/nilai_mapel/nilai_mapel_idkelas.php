@@ -6,7 +6,6 @@ $kelas = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = ".$_GET['id_kelas'].
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Nilai Mapel Siswa Page</h1>
     <?php
@@ -22,9 +21,6 @@ $kelas = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = ".$_GET['id_kelas'].
         unset($_SESSION['message']);
     }
     ?>
-
-
-
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
@@ -34,8 +30,8 @@ $kelas = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = ".$_GET['id_kelas'].
                 Data Nilai Mapel Kelas  <?= $kelas['kelas']." ".$kelas['nm_kelas'] ?>
             </h6>
         </div>
-        <div class="card-body">
-            <table id="example" class="display" style="width:100%">
+        <div class="card-body table-responsive">
+            <table id="example" class="display table" style="width:100%">
                 <thead>
                     <tr>
                         <th>Siswa</th>

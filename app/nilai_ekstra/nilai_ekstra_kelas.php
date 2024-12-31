@@ -31,8 +31,8 @@ include_once '../template/navbar.php';
                 Data Nilai Ekstra Kelas 
             </h6>          
         </div>
-        <div class="card-body">
-            <table id="example" class="display" style="width:100%">
+        <div class="card-body table-responsive">
+            <table id="example" class="display table" style="width:100%">
                 <thead>
                     <tr>
                         <th>Kelas</th>

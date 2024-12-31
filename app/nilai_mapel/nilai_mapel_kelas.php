@@ -1,8 +1,8 @@
-<?php 
-include_once '../template/header.php'; 
-include_once '../template/sidebar.php'; 
-include_once '../template/navbar.php'; 
- ?>
+<?php
+include_once '../template/header.php';
+include_once '../template/sidebar.php';
+include_once '../template/navbar.php';
+?>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -28,11 +28,11 @@ include_once '../template/navbar.php';
                 <a href="<?= $url ?>/app/nilai_mapel/nilai_mapel.php" class="btn btn-info btn-sm btn-circle">
                     <i class="fas fa-arrow-left"></i>
                 </a>
-                Data Nilai Mapel Kelas 
-            </h6>          
+                Data Nilai Mapel Kelas
+            </h6>
         </div>
-        <div class="card-body">
-            <table id="example" class="display" style="width:100%">
+        <div class="card-body table-responsive">
+            <table id="example" class="display table" style="width:100%">
                 <thead>
                     <tr>
                         <th>Kelas</th>

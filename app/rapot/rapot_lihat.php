@@ -24,11 +24,12 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $_GET['id_siswa'
         unset($_SESSION['message']);
     }
     ?>
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-4">        
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
                 Rapot Siswa
             </h6>
+            <br>
             <a href="<?= $url . '/app/rapot/rapot_cetak.php?id_periode=' . $_GET['id_periode'] . '&id_kelas=' . $_GET['id_kelas'] . '&id_siswa=' . $_GET['id_siswa'] ?>" target="_blank" rel="noopener noreferrer" class="btn btn-outline-warning btn-sm"> <i class="fa fa-print"></i> CETAK </a>
         </div>
         <div class="card-body">
@@ -61,10 +62,8 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $_GET['id_siswa'
                         <td></td>
                         <td></td>
                     </tr>
-
                 </tbody>
             </table>
-
             <table class="table table-bordered">
                 <tbody>
                     <tr class="text-center">
@@ -88,7 +87,6 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $_GET['id_siswa'
                         <td></td>
                         <td></td>
                     </tr>
-
                     <?php
                     $mapels = "SELECT mapel.id_mapel, mapel.nm_mapel FROM mapel 
                             LEFT JOIN jadwal_siswa ON mapel.id_mapel = jadwal_siswa.id_mapel  
@@ -170,13 +168,13 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $_GET['id_siswa'
                             </td>
                             <td>
                                 <?php
-                                $huruf = terbilang(QueryOnedata("SELECT AVG(nilai_mapel.nilai) as nilai FROM nilai_mapel 
+                                $huruf = terbilang(round(QueryOnedata("SELECT AVG(nilai_mapel.nilai) as nilai FROM nilai_mapel 
                                  LEFT JOIN jadwal_siswa ON jadwal_siswa.id_jadwal_siswa = nilai_mapel.id_jadwal
                                  LEFT JOIN mapel ON mapel.id_mapel = jadwal_siswa.id_mapel
                                  WHERE mapel.id_mapel = " . $row['id_mapel'] .
                                     " AND jadwal_siswa.id_siswa = " . $_GET['id_siswa'] .
                                     " AND mapel.id_periode = " . $_GET['id_periode'] .
-                                    " AND jadwal_siswa.id_kelas = " . $_GET['id_kelas'] . "")->fetch_assoc()['nilai']);
+                                    " AND jadwal_siswa.id_kelas = " . $_GET['id_kelas'] . "")->fetch_assoc()['nilai']));
                                 echo ucwords($huruf);
                                 ?>
                             </td>
@@ -214,7 +212,6 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $_GET['id_siswa'
                 </tbody>
             </table>
             <table>
-
                 <body>
                     <tr>
                         <td style="width: 400px;"></td>
@@ -232,7 +229,6 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $_GET['id_siswa'
             </table>
         </div>
     </div>
-
 </div>
 <!-- /.container-fluid -->
 <?php include_once '../template/footer.php'; ?>

@@ -6,7 +6,6 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $_GET['id_siswa'
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,30 +14,21 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $_GET['id_siswa'
     <meta name="author" content="">
     <title>SI Penilaian MA</title>
     <!-- Custom fonts for this template-->
-
     <link rel="apple-touch-icon" sizes="180x180" href="<?= $url ?>/assets/img/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="<?= $url ?>/assets/img/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="<?= $url ?>/assets/img/icons/favicon-16x16.png">
-
-
     <link href="<?= $url ?>/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <!-- <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"> -->
     <link href="<?= $url ?>/assets/css/font.css" rel="stylesheet">
-
     <!-- Custom styles for this template-->
     <link href="<?= $url ?>/assets/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="<?= $url ?>/assets/css/dataTables.dataTables.css" rel="stylesheet">
-
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
 </head>
-
 <body>
-
     <!-- Begin Page Content -->
     <div class="container-fluid">
         <div class="card  mb-4">
-
             <div class="card-body">
                 <table class="table">
                     <tbody>
@@ -178,13 +168,13 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $_GET['id_siswa'
                                 </td>
                                 <td>
                                     <?php
-                                    $huruf = terbilang(QueryOnedata("SELECT AVG(nilai_mapel.nilai) as nilai FROM nilai_mapel 
+                                    $huruf = terbilang(round(QueryOnedata("SELECT AVG(nilai_mapel.nilai) as nilai FROM nilai_mapel 
                                  LEFT JOIN jadwal_siswa ON jadwal_siswa.id_jadwal_siswa = nilai_mapel.id_jadwal
                                  LEFT JOIN mapel ON mapel.id_mapel = jadwal_siswa.id_mapel
                                  WHERE mapel.id_mapel = " . $row['id_mapel'] .
                                         " AND jadwal_siswa.id_siswa = " . $_GET['id_siswa'] .
                                         " AND mapel.id_periode = " . $_GET['id_periode'] .
-                                        " AND jadwal_siswa.id_kelas = " . $_GET['id_kelas'] . "")->fetch_assoc()['nilai']);
+                                        " AND jadwal_siswa.id_kelas = " . $_GET['id_kelas'] . "")->fetch_assoc()['nilai']));
                                     echo ucwords($huruf);
                                     ?>
                                 </td>
@@ -213,17 +203,15 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $_GET['id_siswa'
                         ?>
                             <tr>
                                 <td><?= $ekstra['nm_ekstra'] ?></td>
-                                <td><?= $row['nilai'] ?></td>
-                                <td><?= ucwords(terbilang($row['nilai'])) ?></td>
+                                <td><?= round($row['nilai']) ?></td>
+                                <td><?= ucwords(terbilang(round($row['nilai']))) ?></td>
                             </tr>
                         <?php
                         }
                         ?>
                     </tbody>
                 </table>
-
                 <table>
-
                     <body>
                         <tr>
                             <td style="width: 400px;"></td>
@@ -245,8 +233,6 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $_GET['id_siswa'
     <script>
         window.print();
     </script>
-
     <!-- /.container-fluid -->
 </body>
-
 </html>

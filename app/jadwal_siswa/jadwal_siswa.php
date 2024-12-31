@@ -1,7 +1,6 @@
 <?php include_once '../template/header.php'; ?>
 <?php include_once '../template/sidebar.php'; ?>
 <?php include_once '../template/navbar.php'; ?>
-
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -21,60 +20,56 @@
     }
     ?>
 
-    <?php if($_SESSION['level'] == 'wakasiswa'){ ?> 
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-
-                Data Jadwal Siswa
-            </h6>
-
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-xl-4 col-lg-4">
-                    <div class="card shadow mb-4">
-                        <!-- Card Header - Dropdown -->
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Kelas</h6>
-                        </div>
-                        <!-- Card Body -->
-                        <div class="card-body">
-                            <a href="<?= $url ?>/app/jadwal_siswa/jadwal_siswa_kelas.php" class="btn btn-facebook btn-block"><i class="fa fa-arrow-circle-right fa-fw"></i> Lihat Data</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-4 col-lg-4">
-                    <div class="card shadow mb-4">
-                        <!-- Card Header - Dropdown -->
-                        <div class="card-header py-3 d-flex flex-row align-items-center  justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary " style="text-align: center;">Hari</h6>
-                        </div>
-                        <!-- Card Body -->
-                        <div class="card-body">
-                            <a href="<?= $url ?>/app/jadwal_siswa/jadwal_siswa_hari.php" class="btn btn-facebook btn-block"><i class="fa fa-arrow-circle-right fa-fw"></i> Lihat Data</a>
+    <?php if ($_SESSION['level'] == 'wakasiswa') { ?>
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    Data Jadwal Siswa
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-4">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Kelas</h6>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <a href="<?= $url ?>/app/jadwal_siswa/jadwal_siswa_kelas.php" class="btn btn-facebook btn-block"><i class="fa fa-arrow-circle-right fa-fw"></i> Lihat Data</a>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-xl-4 col-lg-4">
-                    <div class="card shadow mb-4">
-                        <!-- Card Header - Dropdown -->
-                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Mapel</h6>
+                    <div class="col-xl-4 col-lg-4">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div class="card-header py-3 d-flex flex-row align-items-center  justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary " style="text-align: center;">Hari</h6>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <a href="<?= $url ?>/app/jadwal_siswa/jadwal_siswa_hari.php" class="btn btn-facebook btn-block"><i class="fa fa-arrow-circle-right fa-fw"></i> Lihat Data</a>
+                            </div>
                         </div>
-                        <!-- Card Body -->
-                        <div class="card-body">
-                            <a href="<?= $url ?>/app/jadwal_siswa/jadwal_siswa_mapel.php" class="btn btn-facebook btn-block"><i class="fa fa-arrow-circle-right fa-fw"></i> Lihat Data</a>
+                    </div>
+                    <div class="col-xl-4 col-lg-4">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Mapel</h6>
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                                <a href="<?= $url ?>/app/jadwal_siswa/jadwal_siswa_mapel.php" class="btn btn-facebook btn-block"><i class="fa fa-arrow-circle-right fa-fw"></i> Lihat Data</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     <?php } ?>
-
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
@@ -84,10 +79,8 @@
                 Data Jadwal Siswa
             </h6>
         </div>
-
-
-        <div class="card-body">
-            <table id="example" class="display" style="width:100%">
+        <div class="card-body table-responsive">
+            <table id="example" class="display table" style="width:100%">
                 <thead>
                     <tr>
                         <th>Siswa</th>

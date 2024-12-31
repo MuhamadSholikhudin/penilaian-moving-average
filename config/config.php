@@ -119,7 +119,7 @@ function Sub_menu_active($sub_menu){
     $string = str_replace(Url_web()."/app/", "", $_SERVER['REQUEST_URI']);
     $expl = explode("/", $string);
     $output = "";
-    if($expl[0] == $sub_menu){
+    if($expl[1] == $sub_menu){
         $output = "active";
     }
     return $output;
@@ -130,7 +130,7 @@ function Menu_active($menus){ //$menus array
     $expl = explode("/", $string);
     $result = "";
     for($x = 0 ; $x < count($menus); $x ++){
-        if ($expl[0] == $menus[$x]) {
+        if ($expl[1] == $menus[$x]) {
             $result = "show";
         }
     }

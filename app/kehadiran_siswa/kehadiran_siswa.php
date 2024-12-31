@@ -19,8 +19,7 @@
     <?php
         unset($_SESSION['message']);
     }
-    ?>
-    
+    ?>    
     <?php if($_SESSION['level'] == 'wakasiswa'){ ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -104,8 +103,8 @@
             </div>
 
         </div>
-        <div class="card-body">
-            <table id="example" class="display" style="width:100%">
+        <div class="card-body  table-responsive">
+            <table id="example" class="display table" style="width:100%">
                 <thead>
                     <tr>
                         <th>Siswa</th>

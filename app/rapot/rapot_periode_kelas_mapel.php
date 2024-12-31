@@ -33,8 +33,8 @@ $mapel = QueryOnedata("SELECT * FROM mapel WHERE id_mapel = " . $_GET['id_mapel'
                 Data Kelas semester
             </h6>
         </div>
-        <div class="card-body">
-            <table id="example" class="display" style="width:100%">
+        <div class="card-body table-responsive">
+            <table id="example" class="display table" style="width:100%">
                 <thead>
                     <tr>
                         <th>Kelas</th>

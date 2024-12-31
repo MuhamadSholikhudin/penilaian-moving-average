@@ -4,7 +4,6 @@
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Jadwal Siswa Page</h1>
     <?php
@@ -20,8 +19,6 @@
         unset($_SESSION['message']);
     }
     ?>
-
-
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
@@ -30,12 +27,9 @@
                 </a>
                 Data Jadwal Siswa Perkelas
             </h6>
-
         </div>
-
-
-        <div class="card-body">
-            <table id="example" class="display" style="width:100%">
+        <div class="card-body  table-responsive">
+            <table id="example" class="display table" style="width:100%">
                 <thead>
                     <tr>
                         <th>Kelas</th>
@@ -73,12 +67,6 @@
             }
         }
     </script>
-
-
-
-
-
 </div>
 <!-- /.container-fluid -->
-
 <?php include_once '../template/footer.php'; ?>

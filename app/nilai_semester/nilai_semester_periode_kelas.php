@@ -26,15 +26,14 @@ $kelas = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = " . $_GET['id_kelas'
         unset($_SESSION['message']);
     }
     ?>
-
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
                 Data Nilai kelas <?= $kelas['kelas']." ". $kelas['nm_kelas'] ?>  periode <?= $periode['nm_periode'] ?>
             </h6>
         </div>
-        <div class="card-body">
-            <table id="example" class="display" style="width:100%">
+        <div class="card-body table-responsive">
+            <table id="example" class="display table" style="width:100%">
                 <thead>
                     <tr>
                         <th>Kelas</th>

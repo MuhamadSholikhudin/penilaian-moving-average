@@ -4,7 +4,6 @@
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Mapel Page</h1>
     <?php
@@ -28,10 +27,9 @@
                 </a>
                 Data Mapel
             </h6>
-
         </div>
-        <div class="card-body">
-            <table id="example" class="display" style="width:100%">
+        <div class="card-body table-responsive">
+            <table id="example" class="display table" style="width:100%">
                 <thead>
                     <tr>
                         <th>Pelajaran</th>

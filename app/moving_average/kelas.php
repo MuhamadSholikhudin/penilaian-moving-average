@@ -1,16 +1,13 @@
 <?php include_once '../template/header.php'; ?>
 <?php include_once '../template/sidebar.php'; ?>
 <?php include_once '../template/navbar.php'; ?>
-
 <?php 
     $periode = QueryOnedata("SELECT * FROM periode WHERE id_periode = ".$_GET['id_periode']." ")->fetch_assoc();
 ?>
-
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Data Nilai kelas periode <?= $periode['nm_periode'] ?></h1>
+    <h1 class="h3 mb-4 text-gray-800">Moving Average</h1>
     <?php
     if (isset($_SESSION['message'])) {
     ?>
@@ -24,11 +21,10 @@
         unset($_SESSION['message']);
     }
     ?>
-
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">                
-                Data <?= $periode['nm_periode'] ?>
+                Moving Average <?= $periode['nm_periode'] ?>
             </h6>
         </div>
         <div class="card-body">
@@ -47,8 +43,7 @@
                         LEFT JOIN jadwal_siswa ON kelas.id_kelas = jadwal_siswa.id_kelas
                         LEFT JOIN mapel ON mapel.id_mapel = jadwal_siswa.id_mapel
                         LEFT JOIN periode ON mapel.id_periode = periode.id_periode
-                        WHERE periode.id_periode = ".$_GET["id_periode"]." GROUP BY kelas.id_kelas
-                        
+                        WHERE periode.id_periode = ".$_GET["id_periode"]." GROUP BY kelas.id_kelas                        
                         ";
                     foreach (QueryManyData($get_kelas) as $row) {
                     ?>
@@ -65,7 +60,6 @@
                     }
                     ?>
                 </tbody>
-
             </table>
         </div>
     </div>
@@ -80,5 +74,4 @@
     </script>
 </div>
 <!-- /.container-fluid -->
-
 <?php include_once '../template/footer.php'; ?>
