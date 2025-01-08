@@ -58,9 +58,10 @@
                     <div class="col-sm-10">
                         <select class="form-control" name="id_mapel" id="id_mapel">
                             <?php
-                            foreach(QueryManyData("SELECT * FROM mapel ") as $row) {
+                            foreach(QueryManyData("SELECT * FROM mapel  ORDER BY id_mapel DESC") as $row) {
+                                $periode = QueryOnedata("SELECT * FROM periode WHERE id_periode =".$row['id_periode']."")->fetch_assoc();
                             ?>
-                                <option value="<?= $row["id_mapel"] ?>"> <?= $row["nm_mapel"] ?> </option>
+                                <option value="<?= $row["id_mapel"] ?>"> <?= $row["nm_mapel"] ?> | <?= $periode['nm_periode'] ?></option>
                             <?php
                             }
                             ?>

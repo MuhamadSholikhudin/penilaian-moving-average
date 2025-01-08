@@ -98,6 +98,7 @@
                         <th>Mapel</th>
                         <th>Nilai</th>
                         <th>Ket Nilai</th>
+                        <th>Periode</th>
                         <th>AKSI</th>
                     </tr>
                 </thead>
@@ -105,15 +106,15 @@
                     <?php
                     foreach (QueryManyData("SELECT * FROM nilai_mapel ") as $row) {
                         $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $row['id_siswa'] . " ")->fetch_assoc();
-                        $mapel = QueryOnedata("SELECT mapel.nm_mapel FROM mapel LEFT JOIN jadwal_siswa ON mapel.id_mapel = jadwal_siswa.id_mapel WHERE jadwal_siswa.id_jadwal_siswa = " . $row['id_jadwal'] . " ")->fetch_assoc();
+                        $mapel = QueryOnedata("SELECT mapel.nm_mapel, mapel.id_periode FROM mapel LEFT JOIN jadwal_siswa ON mapel.id_mapel = jadwal_siswa.id_mapel WHERE jadwal_siswa.id_jadwal_siswa = " . $row['id_jadwal'] . " ")->fetch_assoc();
+                        $periode = QueryOnedata("SELECT * FROM periode WHERE id_periode = " . $mapel['id_periode'] . " ")->fetch_assoc(); 
                     ?>
                         <tr>
                             <td><?= $siswa["nm_siswa"] ?></td>
-                            <td>
-                                <?= $mapel["nm_mapel"] ?>
-                            </td>
+                            <td><?= $mapel["nm_mapel"] ?></td>
                             <td><?= $row["nilai"] ?></td>
                             <td><?= $row["ket_nilai"] ?></td>
+                            <td><?= $periode["nm_periode"] ?></td>
                             <td>
                                 <a href="<?= $url ?>/app/nilai_mapel/nilai_mapel_edit.php?id_nilai_mapel=<?= $row["id_nilai_mapel"] ?>" class="btn btn-warning btn-sm btn-circle">
                                     <i class="fas fa-edit"></i>

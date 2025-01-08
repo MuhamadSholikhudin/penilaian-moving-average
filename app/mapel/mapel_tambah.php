@@ -1,13 +1,10 @@
 <?php include_once '../template/header.php'; ?>
 <?php include_once '../template/sidebar.php'; ?>
 <?php include_once '../template/navbar.php'; ?>
-
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Mapel Page</h1>
-
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
@@ -30,7 +27,7 @@
                     <div class="col-sm-10">                        
                         <select class="form-control" name="id_periode" id="status">
                             <?php
-                            foreach (QueryManyData("SELECT * FROM periode ") as $row) {
+                            foreach (QueryManyData("SELECT * FROM periode  ORDER BY id_periode DESC") as $row) {
                             ?>
                                 <option value="<?= $row['id_periode'] ?>"><?= $row['nm_periode'] ?></option>
                             <?php
@@ -39,7 +36,6 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="mb-3 row">
                     <button type="submit" name="simpanmapel" value="simpanmapel" class="btn btn-primary btn-user btn-block">
                         <i class="fas fa-save"></i> SIMPAN

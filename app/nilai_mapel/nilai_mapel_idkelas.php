@@ -38,6 +38,7 @@ $kelas = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = ".$_GET['id_kelas'].
                         <th>Mapel</th>
                         <th>Nilai</th>
                         <th>Ket Nilai</th>
+                        <th>Periode</th>
                         <th>AKSI</th>
                     </tr>
                 </thead>
@@ -45,7 +46,9 @@ $kelas = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = ".$_GET['id_kelas'].
                     <?php
                     foreach (QueryManyData("SELECT * FROM nilai_mapel LEFT JOIN jadwal_siswa ON nilai_mapel.id_jadwal = jadwal_siswa.id_jadwal_siswa WHERE jadwal_siswa.id_kelas = ".$_GET['id_kelas']." ") as $row) {
                         $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $row['id_siswa'] . " ")->fetch_assoc();
-                        $mapel = QueryOnedata("SELECT mapel.nm_mapel FROM mapel LEFT JOIN jadwal_siswa ON mapel.id_mapel = jadwal_siswa.id_mapel WHERE jadwal_siswa.id_jadwal_siswa = " . $row['id_jadwal'] . " ")->fetch_assoc();
+                        $mapel = QueryOnedata("SELECT mapel.nm_mapel, mapel.id_periode FROM mapel LEFT JOIN jadwal_siswa ON mapel.id_mapel = jadwal_siswa.id_mapel WHERE jadwal_siswa.id_jadwal_siswa = " . $row['id_jadwal'] . " ")->fetch_assoc();
+                        $periode = QueryOnedata("SELECT * FROM periode WHERE id_periode = " . $mapel['id_periode'] . " ")->fetch_assoc(); 
+
                     ?>
                         <tr>
                             <td><?= $siswa["nm_siswa"] ?></td>
@@ -54,6 +57,7 @@ $kelas = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = ".$_GET['id_kelas'].
                             </td>
                             <td><?= $row["nilai"] ?></td>
                             <td><?= $row["ket_nilai"] ?></td>
+                            <td><?= $periode["nm_periode"] ?></td>
                             <td>
                                 <a href="<?= $url ?>/app/nilai_mapel_edit.php?id_nilai_mapel=<?= $row["id_nilai_mapel"] ?>" class="btn btn-warning btn-sm btn-circle">
                                     <i class="fas fa-edit"></i>

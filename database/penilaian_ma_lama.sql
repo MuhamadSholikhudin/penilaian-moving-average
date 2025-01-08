@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 08, 2025 at 11:24 PM
+-- Generation Time: Oct 14, 2024 at 12:13 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -85,9 +85,9 @@ CREATE TABLE `guru` (
 --
 
 INSERT INTO `guru` (`id_guru`, `nip`, `nm_guru`, `alamat_guru`, `jk_guru`, `tgl_lahir`, `no_hp_guru`, `foto`) VALUES
-(1, 1111, 'ulya', 'Jl. Merdeka No. 101', 'P', '1980-06-15', '81234567890', 'ahmad.png'),
+(1, 1111, 'ulya', 'Jl. Merdeka No. 10', 'L', '1980-05-15', '81234567890', 'ahmad.png'),
 (2, 1112, 'guru', 'Jl. Kembang No. 21', 'P', '1982-08-20', '81234567891', 'siti.png'),
-(3, 1113, 'bagus', 'Jl. Mawar No. 3', 'L', '1975-03-22', '81234567892', '6c757d.jpg');
+(3, 1113, 'bagus', 'Jl. Mawar No. 3', 'L', '1975-03-22', '81234567892', 'budi.png');
 
 -- --------------------------------------------------------
 
@@ -111,7 +111,7 @@ CREATE TABLE `jadwal_siswa` (
 --
 
 INSERT INTO `jadwal_siswa` (`id_jadwal_siswa`, `id_siswa`, `id_mapel`, `id_guru`, `id_kelas`, `hari`, `waktu_awal`, `waktu_akhir`) VALUES
-(1, 1, 1, 1, 1, 'Senin', '07:00:00', '07:00:00'),
+(1, 1, 1, 1, 1, 'senin', '07:00:00', '08:00:00'),
 (2, 2, 1, 1, 1, 'senin', '07:00:00', '08:00:00'),
 (3, 3, 1, 1, 1, 'senin', '07:00:00', '08:00:00'),
 (4, 1, 2, 2, 1, 'senin', '08:00:00', '09:00:00'),
@@ -119,10 +119,7 @@ INSERT INTO `jadwal_siswa` (`id_jadwal_siswa`, `id_siswa`, `id_mapel`, `id_guru`
 (6, 3, 2, 2, 1, 'senin', '08:00:00', '09:00:00'),
 (7, 1, 3, 3, 1, 'senin', '09:00:00', '10:00:00'),
 (8, 2, 3, 3, 1, 'senin', '09:00:00', '10:00:00'),
-(9, 3, 3, 3, 1, 'senin', '09:00:00', '10:00:00'),
-(10, 1, 4, 1, 1, 'Senin', '07:00:00', '08:00:00'),
-(11, 2, 4, 1, 1, 'Senin', '07:00:00', '08:00:00'),
-(12, 3, 4, 1, 1, 'Senin', '07:00:00', '08:00:00');
+(9, 3, 3, 3, 1, 'senin', '09:00:00', '10:00:00');
 
 -- --------------------------------------------------------
 
@@ -187,10 +184,7 @@ CREATE TABLE `mapel` (
 INSERT INTO `mapel` (`id_mapel`, `id_periode`, `nm_mapel`) VALUES
 (1, 1, 'BAHASA INDONESIA'),
 (2, 1, 'MATEMATIKA'),
-(3, 1, 'BAHASA INGGRIS'),
-(4, 2, 'BAHASA INDONESIA'),
-(5, 2, 'MATEMATIKA'),
-(6, 2, 'BAHASA INGGRIS');
+(3, 1, 'BAHASA INGGRIS');
 
 -- --------------------------------------------------------
 
@@ -269,18 +263,7 @@ INSERT INTO `nilai_mapel` (`id_nilai_mapel`, `id_siswa`, `id_jadwal`, `nilai`, `
 (33, 1, 2, 87, 'UAS'),
 (34, 2, 2, 78, 'UAS'),
 (35, 1, 3, 84, 'UAS'),
-(36, 2, 3, 76, 'UAS'),
-(37, 2, 1, 94, 'UH4'),
-(38, 1, 1, 75, 'UH1'),
-(39, 1, 1, 75, 'UH1'),
-(40, 2, 1, 87, 'UH1'),
-(41, 3, 1, 80, 'UH1'),
-(42, 3, 1, 88, 'UH2'),
-(43, 3, 1, 89, 'UH3'),
-(44, 3, 1, 90, 'UH1'),
-(45, 3, 1, 90, 'UH4'),
-(46, 3, 1, 92, 'UTS'),
-(47, 3, 1, 95, 'UAS');
+(36, 2, 3, 76, 'UAS');
 
 -- --------------------------------------------------------
 
@@ -299,8 +282,7 @@ CREATE TABLE `periode` (
 --
 
 INSERT INTO `periode` (`id_periode`, `nm_periode`, `status_periode`) VALUES
-(1, 'SEMESTER GASAL 2020', 'non-active'),
-(2, 'SEMESTER GENAP 2020', 'active');
+(1, 'SEMESTER GASAL 2020', 'active');
 
 -- --------------------------------------------------------
 
@@ -318,7 +300,7 @@ CREATE TABLE `siswa` (
   `tgl_lahir_siswa` date DEFAULT NULL,
   `no_hp` varchar(20) NOT NULL,
   `nm_wali` varchar(100) DEFAULT NULL,
-  `status_siswa` varchar(15) DEFAULT NULL
+  `status_siswa` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -326,7 +308,7 @@ CREATE TABLE `siswa` (
 --
 
 INSERT INTO `siswa` (`id_siswa`, `nis`, `nm_siswa`, `id_kelas`, `alamat_siswa`, `jk_siswa`, `tgl_lahir_siswa`, `no_hp`, `nm_wali`, `status_siswa`) VALUES
-(1, '101', 'Ali', 1, 'Jl. Kebon Jeruk No. 1', 'L', '2010-01-15', '81234567890', 'Bapak Ali', 'Aktif'),
+(1, '101', 'Ali', 1, 'Jl. Kebon Jeruk No. 1', 'L', '2010-01-15', '81234567890', 'Bapak Ali', 'acrive'),
 (2, '102', 'Alya', 1, 'Jl. Kebon Jeruk No. 2', 'P', '2010-02-17', '81234567891', 'Bapak Alya', 'acrive'),
 (3, '103', 'doni', 1, 'Jl. UMK', 'L', '2000-10-13', '897799696687', 'yudi', 'active');
 
@@ -350,7 +332,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `nm_pengguna`, `level`, `status`) VALUES
-(1, 'andy', 'andy', 'andy', 'wakasiswa', 'active'),
+(1, 'andy', 'andy', 'andy', 'guru', 'active'),
 (2, 'bagus', 'bagus', 'bagus', 'guru', 'active'),
 (3, 'ina', 'ina', 'ina', 'guru', 'active'),
 (4, 'ega', 'ega', 'ega', 'wakasiswa', 'active');
@@ -469,7 +451,7 @@ ALTER TABLE `guru`
 -- AUTO_INCREMENT for table `jadwal_siswa`
 --
 ALTER TABLE `jadwal_siswa`
-  MODIFY `id_jadwal_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_jadwal_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `kehadiran_siswa`
@@ -487,25 +469,25 @@ ALTER TABLE `kelas`
 -- AUTO_INCREMENT for table `mapel`
 --
 ALTER TABLE `mapel`
-  MODIFY `id_mapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_mapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `nilai_ekstra`
 --
 ALTER TABLE `nilai_ekstra`
-  MODIFY `id_nilai_ekstra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_nilai_ekstra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `nilai_mapel`
 --
 ALTER TABLE `nilai_mapel`
-  MODIFY `id_nilai_mapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id_nilai_mapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `periode`
 --
 ALTER TABLE `periode`
-  MODIFY `id_periode` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_periode` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `siswa`

@@ -195,9 +195,9 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $_GET['id_siswa'
                     <tbody>
                         <?php
                         $ekstra_kulikuler = "SELECT * FROM nilai_ekstra 
-                    JOIN ekstra_siswa ON nilai_ekstra.id_ekstra_siswa = ekstra_siswa.id_ekstra_siswa 
-                    WHERE nilai_ekstra.id_siswa = " . $_GET['id_siswa'] . " 
-                    AND ekstra_siswa.id_periode = " . $_GET['id_periode'] . "";
+                            JOIN ekstra_siswa ON nilai_ekstra.id_ekstra_siswa = ekstra_siswa.id_ekstra_siswa 
+                            WHERE nilai_ekstra.id_siswa = " . $_GET['id_siswa'] . " 
+                            AND ekstra_siswa.id_periode = " . $_GET['id_periode'] . "";
                         foreach (QueryManyData($ekstra_kulikuler) as $row) {
                             $ekstra = QueryOnedata("SELECT * FROM ekstra WHERE id_ekstra = " . $row['id_ekstra'] . "")->fetch_assoc();
                         ?>

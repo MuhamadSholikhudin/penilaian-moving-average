@@ -39,7 +39,7 @@
                 </thead>
                 <tbody>
                     <?php
-                    foreach (QueryManyData("SELECT * FROM mapel ") as $row) {
+                    foreach (QueryManyData("SELECT * FROM mapel ORDER BY id_mapel DESC") as $row) {
                     ?>
                         <tr>
                             <td><?= $row["nm_mapel"] ?></td>
