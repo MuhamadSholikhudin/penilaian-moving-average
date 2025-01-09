@@ -13,15 +13,14 @@ $val_prev_3 = 0;
 
 $prev_1 = QueryOnedata("SELECT * FROM periode WHERE id_periode < " . $_GET['id_periode'] . " ORDER BY id_periode DESC");
 if ($prev_1->num_rows > 0) {
-    $val_prev_1 = $prev_1->fetch_assoc();
-
+    $val_prev_1 = QueryOnedata("SELECT * FROM periode WHERE id_periode < " . $_GET['id_periode'] . " ORDER BY id_periode DESC")->fetch_assoc();
     $prev_2 = QueryOnedata("SELECT * FROM periode WHERE id_periode < " . $prev_1->fetch_assoc()['id_periode'] . " ");
     if ($prev_2->num_rows > 0) {
-        $val_prev_2 = $prev_2->fetch_assoc();
+        $val_prev_2 = QueryOnedata("SELECT * FROM periode WHERE id_periode < " . $prev_1->fetch_assoc()['id_periode'] . " ")->fetch_assoc();
 
         $prev_3 = QueryOnedata("SELECT * FROM periode WHERE id_periode < " . $prev_2->fetch_assoc()['id_periode'] . " ");
         if ($prev_3->num_rows > 0) {
-            $val_prev_3 = $prev_3->fetch_assoc();
+            $val_prev_3 = QueryOnedata("SELECT * FROM periode WHERE id_periode < " . $prev_2->fetch_assoc()['id_periode'] . " ")->fetch_assoc();
         }
     }
 }
@@ -103,8 +102,7 @@ if ($prev_1->num_rows > 0) {
                                     " AND jadwal_siswa.id_kelas = " . $_GET['id_kelas'] . "";
                                 $avg_prev_3 = QueryOnedata($nilai_rata2_prev_3);
                                 echo $avg_prev_3->fetch_assoc()['nilai'];
-
-                                array_push($arg_3_periode, $avg_prev_3->fetch_assoc()['nilai']);
+                                array_push($arg_3_periode, QueryOnedata($nilai_rata2_prev_3)->fetch_assoc()['nilai']);
                             } else {
                                 echo "-";
                             }
@@ -121,7 +119,7 @@ if ($prev_1->num_rows > 0) {
                                     " AND jadwal_siswa.id_kelas = " . $_GET['id_kelas'] . "";
                                 $avg_prev_2 = QueryOnedata($nilai_rata2_prev_2);
                                 echo $avg_prev_2->fetch_assoc()['nilai'];
-                                array_push($arg_3_periode, $avg_prev_2->fetch_assoc()['nilai']);
+                                array_push($arg_3_periode, QueryOnedata($nilai_rata2_prev_2)->fetch_assoc()['nilai']);
                             } else {
                                 echo "-";
                             }
@@ -139,7 +137,7 @@ if ($prev_1->num_rows > 0) {
                                     " AND jadwal_siswa.id_kelas = " . $_GET['id_kelas'] . "";
                                 $avg_prev_1 = QueryOnedata($nilai_rata2_prev_1);
                                 echo $avg_prev_1->fetch_assoc()['nilai'];
-                                array_push($arg_3_periode, $avg_prev_1->fetch_assoc()['nilai']);
+                                array_push($arg_3_periode, QueryOnedata($nilai_rata2_prev_1)->fetch_assoc()['nilai']);
                             } else {
                                 echo "-";
                             }

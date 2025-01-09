@@ -111,59 +111,66 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $_GET['id_siswa'
 
                                 $prev_1 = QueryOnedata("SELECT * FROM periode WHERE id_periode < " . $_GET['id_periode'] . " ORDER BY id_periode DESC");
                                 if ($prev_1->num_rows > 0) {
-                                    $val_prev_1 = $prev_1->fetch_assoc();
+                                    $val_prev_1 = QueryOnedata("SELECT * FROM periode WHERE id_periode < " . $_GET['id_periode'] . " ORDER BY id_periode DESC")->fetch_assoc();
 
                                     $nilai_rata2_prev_3 = "SELECT AVG(nilai_mapel.nilai) as nilai FROM nilai_mapel 
                                         LEFT JOIN jadwal_siswa ON jadwal_siswa.id_jadwal_siswa = nilai_mapel.id_jadwal
                                         LEFT JOIN mapel ON mapel.id_mapel = jadwal_siswa.id_mapel
-                                        WHERE mapel.id_mapel = " . $mapel['id_mapel'] .
-                                        " AND mapel.id_periode = " . $val_prev_3['id_periode'] .
+                                        WHERE mapel.id_mapel = " . $row['id_mapel'] .
+                                        " AND mapel.id_periode = " . $val_prev_1['id_periode'] .
                                         " AND jadwal_siswa.id_kelas = " . $_GET['id_kelas'] . "";
                                     $avg_prev_3 = QueryOnedata($nilai_rata2_prev_3);
-                                    array_push($arg_3_periode, $avg_prev_3->fetch_assoc()['nilai']);
+                                    array_push($arg_3_periode, QueryOnedata($nilai_rata2_prev_3)->fetch_assoc()['nilai']);
 
                                     $prev_2 = QueryOnedata("SELECT * FROM periode WHERE id_periode < " . $prev_1->fetch_assoc()['id_periode'] . " ");
                                     if ($prev_2->num_rows > 0) {
-                                        $val_prev_2 = $prev_2->fetch_assoc();
+                                        $val_prev_2 = QueryOnedata("SELECT * FROM periode WHERE id_periode < " . $prev_1->fetch_assoc()['id_periode'] . " ")->fetch_assoc();
 
                                         $nilai_rata2_prev_2 = "SELECT AVG(nilai_mapel.nilai) as nilai FROM nilai_mapel 
                                             LEFT JOIN jadwal_siswa ON jadwal_siswa.id_jadwal_siswa = nilai_mapel.id_jadwal
                                             LEFT JOIN mapel ON mapel.id_mapel = jadwal_siswa.id_mapel
-                                            WHERE mapel.id_mapel = " . $mapel['id_mapel'] .
+                                            WHERE mapel.id_mapel = " . $row['id_mapel'] .
                                             " AND mapel.id_periode = " . $val_prev_2['id_periode'] .
                                             " AND jadwal_siswa.id_kelas = " . $_GET['id_kelas'] . "";
                                         $avg_prev_2 = QueryOnedata($nilai_rata2_prev_2);
-                                        array_push($arg_3_periode, $avg_prev_2->fetch_assoc()['nilai']);
+                                        array_push($arg_3_periode, QueryOnedata($nilai_rata2_prev_2)->fetch_assoc()['nilai']);
 
                                         $prev_3 = QueryOnedata("SELECT * FROM periode WHERE id_periode < " . $prev_2->fetch_assoc()['id_periode'] . " ");
                                         if ($prev_3->num_rows > 0) {
-                                            $val_prev_3 = $prev_3->fetch_assoc();
+                                            $val_prev_3 = QueryOnedata("SELECT * FROM periode WHERE id_periode < " . $prev_2->fetch_assoc()['id_periode'] . " ")->fetch_assoc();
 
                                             $nilai_rata2_prev_1 = "SELECT AVG(nilai_mapel.nilai) as nilai FROM nilai_mapel 
                                                 LEFT JOIN jadwal_siswa ON jadwal_siswa.id_jadwal_siswa = nilai_mapel.id_jadwal
                                                 LEFT JOIN mapel ON mapel.id_mapel = jadwal_siswa.id_mapel
-                                                WHERE mapel.id_mapel = " . $mapel['id_mapel'] .
-                                                " AND mapel.id_periode = " . $val_prev_1['id_periode'] .
+                                                WHERE mapel.id_mapel = " . $row['id_mapel'] .
+                                                " AND mapel.id_periode = " . $val_prev_3['id_periode'] .
                                                 " AND jadwal_siswa.id_kelas = " . $_GET['id_kelas'] . "";
                                             $avg_prev_1 = QueryOnedata($nilai_rata2_prev_1);
-                                            array_push($arg_3_periode, $avg_prev_1->fetch_assoc()['nilai']);
+                                            array_push($arg_3_periode, QueryOnedata($nilai_rata2_prev_1)->fetch_assoc()['nilai']);
                                         }
                                     }
                                 }
                                 if (count($arg_3_periode) != 0) {
-                                    echo  $jumlah = (array_sum($arg_3_periode) / count($arg_3_periode));
+                                    // Nilai KKM
+                                     $jumlah = (array_sum($arg_3_periode) / count($arg_3_periode));
+                                     if ($jumlah != 0) {
+                                        echo $jumlah;
+                                     }
                                 }
                                 ?>
                             </td>
                             <td>
                                 <?php
-                                echo round(QueryOnedata("SELECT AVG(nilai_mapel.nilai) as nilai FROM nilai_mapel 
+                                $nilai_mapel_semester = QueryOnedata("SELECT AVG(nilai_mapel.nilai) as nilai FROM nilai_mapel 
                                 LEFT JOIN jadwal_siswa ON jadwal_siswa.id_jadwal_siswa = nilai_mapel.id_jadwal
                                 LEFT JOIN mapel ON mapel.id_mapel = jadwal_siswa.id_mapel
                                 WHERE mapel.id_mapel = " . $row['id_mapel'] .
                                     " AND jadwal_siswa.id_siswa = " . $_GET['id_siswa'] .
                                     " AND mapel.id_periode = " . $_GET['id_periode'] .
-                                    " AND jadwal_siswa.id_kelas = " . $_GET['id_kelas'] . "")->fetch_assoc()['nilai']);
+                                    " AND jadwal_siswa.id_kelas = " . $_GET['id_kelas'] . "")->fetch_assoc()['nilai'];
+                                if($nilai_mapel_semester != 0){
+                                    echo round($nilai_mapel_semester);                                
+                                }                                
                                 ?>
                             </td>
                             <td>
@@ -175,7 +182,9 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $_GET['id_siswa'
                                     " AND jadwal_siswa.id_siswa = " . $_GET['id_siswa'] .
                                     " AND mapel.id_periode = " . $_GET['id_periode'] .
                                     " AND jadwal_siswa.id_kelas = " . $_GET['id_kelas'] . "")->fetch_assoc()['nilai']));
-                                echo ucwords($huruf);
+                                    if($nilai_mapel_semester != 0){
+                                        echo ucwords($huruf);
+                                    }
                                 ?>
                             </td>
                         </tr>
