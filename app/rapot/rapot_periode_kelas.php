@@ -65,6 +65,9 @@ $kelas = QueryOnedata("SELECT * FROM kelas WHERE id_kelas = " . $_GET['id_kelas'
             </table>
         </div>
     </div>
+    <a href="<?= $url ?>/app/rapot/rapot_periode.php?id_periode=<?= $_GET['id_periode'] ?>" class="btn btn-primary btn-sm ">
+        <i class="fas fa-arrow-left"></i> Kembali
+    </a> 
     <script>
         function ConfirmDelete(id) {
             let text = "Apakah Anda Yakin Ingin Menghapus data!\n OK or Cancel.";

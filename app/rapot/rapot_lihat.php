@@ -30,6 +30,9 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $_GET['id_siswa'
                 Rapot Siswa
             </h6>
             <br>
+            <a href="<?= $url ?>/app/rapot/rapot_periode.php?id_periode=<?= $_GET['id_periode'] ?>&id_kelas=<?= $_GET['id_kelas'] ?>" class="btn btn-primary btn-sm ">
+                <i class="fas fa-arrow-left"></i> Kembali
+            </a> 
             <a href="<?= $url . '/app/rapot/rapot_cetak.php?id_periode=' . $_GET['id_periode'] . '&id_kelas=' . $_GET['id_kelas'] . '&id_siswa=' . $_GET['id_siswa'] ?>" target="_blank" rel="noopener noreferrer" class="btn btn-outline-warning btn-sm"> <i class="fa fa-print"></i> CETAK </a>
         </div>
         <div class="card-body">
@@ -122,10 +125,9 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $_GET['id_siswa'
                                     $avg_prev_3 = QueryOnedata($nilai_rata2_prev_3);
                                     array_push($arg_3_periode, QueryOnedata($nilai_rata2_prev_3)->fetch_assoc()['nilai']);
 
-                                    $prev_2 = QueryOnedata("SELECT * FROM periode WHERE id_periode < " . $prev_1->fetch_assoc()['id_periode'] . " ");
+                                    $prev_2 = QueryOnedata("SELECT * FROM periode WHERE id_periode < " . QueryOnedata("SELECT * FROM periode WHERE id_periode < " . $_GET['id_periode'] . " ORDER BY id_periode DESC")->fetch_assoc()['id_periode'] . " ");
                                     if ($prev_2->num_rows > 0) {
-                                        $val_prev_2 = QueryOnedata("SELECT * FROM periode WHERE id_periode < " . $prev_1->fetch_assoc()['id_periode'] . " ")->fetch_assoc();
-
+                                        $val_prev_2 = QueryOnedata("SELECT * FROM periode WHERE id_periode < " . QueryOnedata("SELECT * FROM periode WHERE id_periode < " . $_GET['id_periode'] . " ORDER BY id_periode DESC")->fetch_assoc()['id_periode'] . " ")->fetch_assoc();                                        
                                         $nilai_rata2_prev_2 = "SELECT AVG(nilai_mapel.nilai) as nilai FROM nilai_mapel 
                                             LEFT JOIN jadwal_siswa ON jadwal_siswa.id_jadwal_siswa = nilai_mapel.id_jadwal
                                             LEFT JOIN mapel ON mapel.id_mapel = jadwal_siswa.id_mapel
@@ -135,9 +137,9 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $_GET['id_siswa'
                                         $avg_prev_2 = QueryOnedata($nilai_rata2_prev_2);
                                         array_push($arg_3_periode, QueryOnedata($nilai_rata2_prev_2)->fetch_assoc()['nilai']);
 
-                                        $prev_3 = QueryOnedata("SELECT * FROM periode WHERE id_periode < " . $prev_2->fetch_assoc()['id_periode'] . " ");
+                                        $prev_3 = QueryOnedata("SELECT * FROM periode WHERE id_periode < " . QueryOnedata("SELECT * FROM periode WHERE id_periode < " . QueryOnedata("SELECT * FROM periode WHERE id_periode < " . $_GET['id_periode'] . " ORDER BY id_periode DESC")->fetch_assoc()['id_periode'] . " ")->fetch_assoc()['id_periode'] . " ");
                                         if ($prev_3->num_rows > 0) {
-                                            $val_prev_3 = QueryOnedata("SELECT * FROM periode WHERE id_periode < " . $prev_2->fetch_assoc()['id_periode'] . " ")->fetch_assoc();
+                                            $val_prev_3 = QueryOnedata("SELECT * FROM periode WHERE id_periode < " . QueryOnedata("SELECT * FROM periode WHERE id_periode < " . QueryOnedata("SELECT * FROM periode WHERE id_periode < " . $_GET['id_periode'] . " ORDER BY id_periode DESC")->fetch_assoc()['id_periode'] . " ")->fetch_assoc()['id_periode'] . " ")->fetch_assoc();
 
                                             $nilai_rata2_prev_1 = "SELECT AVG(nilai_mapel.nilai) as nilai FROM nilai_mapel 
                                                 LEFT JOIN jadwal_siswa ON jadwal_siswa.id_jadwal_siswa = nilai_mapel.id_jadwal
@@ -239,5 +241,6 @@ $siswa = QueryOnedata("SELECT * FROM siswa WHERE id_siswa = " . $_GET['id_siswa'
         </div>
     </div>
 </div>
+                       
 <!-- /.container-fluid -->
 <?php include_once '../template/footer.php'; ?>

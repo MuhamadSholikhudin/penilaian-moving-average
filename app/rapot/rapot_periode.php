@@ -64,6 +64,9 @@
             </table>
         </div>
     </div>
+    <a href="<?= $url ?>/app/rapot/rapot.php" class="btn btn-primary btn-sm ">
+        <i class="fas fa-arrow-left"></i> Kembali
+    </a> 
     <script>
         function ConfirmDelete(id) {
             let text = "Apakah Anda Yakin Ingin Menghapus data!\n OK or Cancel.";
@@ -75,5 +78,4 @@
     </script>
 </div>
 <!-- /.container-fluid -->
-
 <?php include_once '../template/footer.php'; ?>
